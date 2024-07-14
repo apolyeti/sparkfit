@@ -16,7 +16,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <div className="flex flex-col items-center justify-center mt-8">
+          <h1 className="text-5xl font-bold">Sparkfit</h1>
+          <p className="text-xl">Get outfit suggestions based on the weather</p>
+        </div>
+        {children}
+      </body>
     </html>
   );
 }

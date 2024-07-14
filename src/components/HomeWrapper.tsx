@@ -26,9 +26,8 @@ export default function HomeWrapper() {
     };
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen p-4">
-            <h1 className="text-6xl font-bold">Sparkfit</h1>
-            <p className="text-xl">Get outfit suggestions based on the weather</p>
+        <div className="flex flex-col items-center justify-center">
+
             <div className="mt-8">
                 <FileInput addImage={addImage} />
             </div>
