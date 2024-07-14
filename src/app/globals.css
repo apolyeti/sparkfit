@@ -22,7 +22,7 @@
     /* Dark mode colors */
     --background-start: var(--dark-purple);
     --background-end: var(--russian-violet);
-    --foreground: var(--french-gray);
+    --foreground: var(--linen);
     --primary: var(--delft-blue);
     --secondary: var(--linen);
   }
@@ -75,6 +75,8 @@ body {
     justify-content: center;
     transition: transform 0.3s ease;
     box-shadow: none; /* Ensure no box-shadow */
+    /* make cursor turn into pointer when hovering */
+    cursor: pointer;
   }
   
   .image-container {
@@ -127,4 +129,20 @@ body {
   .no-line {
     border: none; /* Ensure no border */
   }
+
+  .closet-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        overflow-y: auto;
+        max-height: 100vh;
+        width: 100%;
+        padding: 16px;
+    }
+    .image-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+    }
 }
