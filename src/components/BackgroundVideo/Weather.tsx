@@ -35,10 +35,11 @@ interface WeatherProps {
 }
 
 export default function Weather({ weather }: WeatherProps) {
+
     return (
         <div>
-            {weather.includes("sun") && <Sunny />}
-            {weather.includes("rain") && <Rainy />}
+            {weather.toLowerCase().includes("sun") && <Sunny />}
+            {weather.toLowerCase().includes("rain") && <Rainy />}
         </div>
     );
 }
