@@ -17,3 +17,16 @@ export function storageAvailable(type: 'localStorage' | 'sessionStorage'): boole
         );
     }
 }
+
+
+// TODO: Make this API call on the Flask backend instead.
+export async function getWeatherData(API_KEY: string, lat: number, lon: number): Promise<any> {
+    return fetch(`http://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${lat},${lon}`)
+        .then((response) => response.json())
+        .then((data) => {
+            return data;
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+}

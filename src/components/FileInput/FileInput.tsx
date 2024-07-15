@@ -34,7 +34,10 @@ export default function FileInput({ addImage }: { addImage: (image: SparkFitImag
                 const newImage: SparkFitImage = {
                     name: data.predictions[0],
                     data: reader.result as string,
-                    file_name: file.name
+                    file_name: file.name,
+                    fabric: null,
+                    color: null,
+                    fit: null,
                 };
 
                 addImage(newImage);
