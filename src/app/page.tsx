@@ -1,5 +1,4 @@
 import { Metadata } from "next";
-import HomeWrapper from "@components/HomeWrapper";
 
 export const metadata: Metadata = {
     title: "Sparkfit",
@@ -8,8 +7,6 @@ export const metadata: Metadata = {
 
 export default function Home() {
     return (
-        <>
-            <HomeWrapper />
-        </>
+        <></>
     );
 }
