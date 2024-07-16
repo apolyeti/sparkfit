@@ -6,17 +6,18 @@ interface DashboardItemProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 export default function DashboardItem({ name, children }: DashboardItemProps) {
-    // Have a card with top being header (or name of item)
-    // and everything below it being the children
+    // use tailwindcss to make the dashboard items
+    // top left of card will be header name
+    // rest will be content below the header
 
     return (
-        <div className="card flex flex-col items-center justify-center no-line">
-            <div className="text-lg mb-6">
+        <div className="dashboard-item p-4 rounded-lg max-h-80">
+            <div className="text-xl font-semibold mb-4">
                 {name}
             </div>
-            <div className="mb-6">
+            <div>
                 {children}
             </div>
-        </div>
+        </div> 
     );
 }
