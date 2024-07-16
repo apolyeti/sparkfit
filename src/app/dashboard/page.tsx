@@ -12,15 +12,18 @@ export default function Dashboard() {
     // and each content just content 1.. 2..
     
         return (
-            <div className="grid grid-cols-3 gap-4 p-9">
-                <DashboardItem name="header1">
-                    content1
+            <div className="grid grid-cols-12 gap-3 p-9">
+                <DashboardItem name="Weather Condition" className="col-span-4">
+                    Sunny (example)
                 </DashboardItem>
-                <DashboardItem name="header2">
-                    content2
+                <DashboardItem name="Location" className="col-span-3">
+                    City, State
                 </DashboardItem>
-                <DashboardItem name="header3">
-                    content3
+                <DashboardItem name="Temperature" className="col-span-3">
+                    72°F (example)
+                </DashboardItem>
+                <DashboardItem name="Wind" className="w-52 col-span-2">
+                    5 mph (example)
                 </DashboardItem>
             </div>
         );
