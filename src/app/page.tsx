@@ -1,9 +1,5 @@
-import Weather from "@components/BackgroundVideo/Weather";
-import { useEffect, useState } from "react";
-import type { UserLocationInfo } from "@/utils/types";
-import { getWeatherData } from "@/utils/helpers";
-import { SparkFitError } from "@/utils/errors";
-import Header from "@components/Header";
+import Link from "next/link";
+import GetStartedButton from "@/components/HomePageComponents/GetStartedButton";
 
 export default function Home() {
 
@@ -42,10 +38,14 @@ export default function Home() {
     // }, [API_KEY]);
 
     return (
-        <div className="flex items-center justify-center h-screen">
+        <div className="flex items-center justify-center h-screen flex-col">
             <h1 className="text-5xl animate-fadeInDown">
                 Sparkfit
             </h1>
+            <p className="text-xl animate-fadeInDown p-2">
+                Get outfit suggestions based on the weather
+            </p>
+            <GetStartedButton />
         </div>
     );
 }

@@ -1,0 +1,12 @@
+.card {
+    margin: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #3e2c4e;
+    color: #f7ece1;
+}
+
+.sidebar {
+    background-color: #281935; 
+    color: #f7ece1;
+}
