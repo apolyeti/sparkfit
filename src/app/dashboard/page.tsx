@@ -1,12 +1,14 @@
 "use client";
 
 import { useState } from "react";
+import { useSession } from "next-auth/react";
 import DashboardItem from "@/components/DashboardComponents/DashboardItem";
 import FileInput from "@/components/DashboardComponents/FileInput";
 import "@styles/dashboard.css";
 
 
 export default function Dashboard() {
+    const { data: session } = useSession();
 
     // use tailwindcss to make grid for dashboard
     // with each dashboard item just being
@@ -18,6 +20,7 @@ export default function Dashboard() {
                 <div className="grid grid-cols-3 gap-4">
                     <DashboardItem name="Location">
                         Redmond, WA
+                        {session ? session.user?.email : "No session"}
                     </DashboardItem>
                     <DashboardItem name="Temperature">
                         72°F
