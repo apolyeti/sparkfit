@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import DashboardItem from "@/components/DashboardComponents/DashboardItem";
+import FileInput from "@/components/DashboardComponents/FileInput";
 import "@styles/dashboard.css";
 
 
@@ -24,9 +25,13 @@ export default function Dashboard() {
                     <DashboardItem name="Wind Speed">
                         5 mph
                     </DashboardItem>
-                    <DashboardItem name="Dropzone Component" className="col-span-3">
-                        Drop Items here
-                    </DashboardItem>
+                    <div className="col-span-3 h-44">
+                        <FileInput>
+                            <div className="text-2xl">
+                                Upload a file
+                            </div>
+                        </FileInput>
+                    </div>
                 </div>
             </div>
         );

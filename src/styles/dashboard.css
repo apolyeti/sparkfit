@@ -28,3 +28,14 @@
     grid-template-columns: repeat(3, 1fr);
     gap: 16px;
 }
+
+.dropzone {
+    background-color: #281935;
+    /* take up entire space it can */
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    height: 100%;
+}
