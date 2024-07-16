@@ -3,18 +3,28 @@
     color: #f7ece1;
 }
 
+.dashboard-container {
+    width: 100%;
+}
+
 .dashboard-item {
     background-color: #402855;
 }
 
 .dashboard-item:hover {
-    transform: scale(1.05);
+    transform: scale(1.02);
     transition: transform 0.2s;
     background-color: #53356e;
 }
 
 .dashboard-item:active {
-    transform: scale(0.95);
+    transform: scale(0.98);
     transition: transform 0.2s;
     background-color: #3b264e;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
 }

@@ -17,7 +17,10 @@ const Sidebar = () => {
                     link 2
                 </div>
                 <div className="mb-6">
-                    link 3
+                    {/* link that opens a new tab to github */}
+                    <a href="https://github.com/apolyeti/sparkfit" target="_blank" rel="noreferrer">
+                        Github
+                    </a>
                 </div>
             </div>
         </div>

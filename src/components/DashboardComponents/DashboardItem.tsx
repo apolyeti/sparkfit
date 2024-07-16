@@ -12,8 +12,8 @@ export default function DashboardItem({ name, children, className }: DashboardIt
     // rest will be content below the header
 
     return (
-        <div className={clsx("dashboard-item p-4 rounded-lg max-h-60", className)}>
-            <div className="text-xl font-semibold mb-4">
+        <div className={clsx("dashboard-item p-4 rounded-lg shadow-lg h-48", className)}>
+            <div className="text-xl font-semibold mb-2">
                 {name}
             </div>
             <div>

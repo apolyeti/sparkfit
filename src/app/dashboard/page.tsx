@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import DashboardItem from "@/components/DashboardComponents/DashboardItem";
+import "@styles/dashboard.css";
 
 
 export default function Dashboard() {
@@ -12,19 +13,21 @@ export default function Dashboard() {
     // and each content just content 1.. 2..
     
         return (
-            <div className="grid grid-cols-12 gap-3 p-9">
-                <DashboardItem name="Weather Condition" className="col-span-4">
-                    Sunny (example)
-                </DashboardItem>
-                <DashboardItem name="Location" className="col-span-3">
-                    City, State
-                </DashboardItem>
-                <DashboardItem name="Temperature" className="col-span-3">
-                    72°F (example)
-                </DashboardItem>
-                <DashboardItem name="Wind" className="w-52 col-span-2">
-                    5 mph (example)
-                </DashboardItem>
+            <div className="p-5 w-full">
+                <div className="grid grid-cols-3 gap-4">
+                    <DashboardItem name="Location">
+                        Redmond, WA
+                    </DashboardItem>
+                    <DashboardItem name="Temperature">
+                        72°F
+                    </DashboardItem>
+                    <DashboardItem name="Wind Speed">
+                        5 mph
+                    </DashboardItem>
+                    <DashboardItem name="Dropzone Component" className="col-span-3">
+                        Drop Items here
+                    </DashboardItem>
+                </div>
             </div>
         );
 }
