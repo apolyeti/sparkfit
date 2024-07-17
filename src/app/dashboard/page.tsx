@@ -1,7 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
+import { getWeatherData } from "@/utils/helpers";
+import type { UserLocationInfo } from "@/utils/types";
 import DashboardItem from "@/components/DashboardComponents/DashboardItem";
 import FileInput from "@/components/DashboardComponents/FileInput";
 import Image from "next/image";
@@ -10,6 +12,20 @@ import "@styles/dashboard.css";
 
 export default function Dashboard() {
     const { data: session } = useSession();
+    const [userLocationInfo, setUserLocationInfo] = useState<UserLocationInfo | null>(null);
+    
+    useEffect(() => {
+        const API_KEY = process.env.NEXT_PUBLIC_WEATHER_API_KEY || "NO API KEY FOUND";
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(async (position) => {
+                const { latitude, longitude } = position.coords;
+                const weatherData = await getWeatherData(API_KEY, latitude, longitude);
+                setUserLocationInfo(weatherData);
+            }
+            );
+        }
+    }, []);
+
 
     // use tailwindcss to make grid for dashboard
     // with each dashboard item just being
@@ -20,13 +36,13 @@ export default function Dashboard() {
             <div className="p-5 w-full">
                 <div className="grid grid-cols-3 gap-4">
                     <DashboardItem name="Location">
-                        Redmond, WA
+                        {userLocationInfo?.city}, {userLocationInfo?.country}
                     </DashboardItem>
                     <DashboardItem name="Temperature">
-                        72°F
+                        {userLocationInfo?.temperature} F
                     </DashboardItem>
                     <DashboardItem name="Wind Speed">
-                        5 mph
+                        {userLocationInfo?.wind_speed} mph
                     </DashboardItem>
                     <div className="dashboard-item col-span-3 h-44">
                         <FileInput>
