@@ -1,7 +1,13 @@
+"use client";
 import Link from "next/link";
 import GetStartedButton from "@/components/HomePageComponents/GetStartedButton";
+import SignInGithub from "@/components/SignInGithub";
+import { useSession } from "next-auth/react";
 
 export default function Home() {
+
+    const {data : session} = useSession();
+
 
     // const [location, setLocation] = useState<UserLocationInfo | null>(null);
     // const API_KEY = process.env.NEXT_PUBLIC_WEATHER_API_KEY;
@@ -46,6 +52,7 @@ export default function Home() {
                 Get outfit suggestions based on the weather
             </p>
             <GetStartedButton />
+            
         </div>
     );
 }
