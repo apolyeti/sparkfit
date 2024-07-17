@@ -12,6 +12,7 @@ export default async function SignInPage() {
             "use server"
             try {
               await signIn(provider.id)
+              redirect("/dashboard")
             } catch (error) {
                 if (error instanceof AuthError) {
                     redirect("/error")
