@@ -1,8 +1,6 @@
 import NextAuth, { NextAuthConfig} from "next-auth";
 import GitHub from "next-auth/providers/github";
-import Credentials from "next-auth/providers/credentials";
 import type { Provider } from "next-auth/providers";
-import { OAuth2Config } from "next-auth/providers";
 
 const providers: Provider[] = [
     GitHub,
