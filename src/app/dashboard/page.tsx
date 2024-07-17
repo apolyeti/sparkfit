@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useSession } from "next-auth/react";
 import DashboardItem from "@/components/DashboardComponents/DashboardItem";
 import FileInput from "@/components/DashboardComponents/FileInput";
+import Image from "next/image";
 import "@styles/dashboard.css";
 
 
@@ -20,7 +21,6 @@ export default function Dashboard() {
                 <div className="grid grid-cols-3 gap-4">
                     <DashboardItem name="Location">
                         Redmond, WA
-                        {session ? session.user?.email : "No session"}
                     </DashboardItem>
                     <DashboardItem name="Temperature">
                         72°F
@@ -28,13 +28,27 @@ export default function Dashboard() {
                     <DashboardItem name="Wind Speed">
                         5 mph
                     </DashboardItem>
-                    <div className="col-span-3 h-44">
+                    <div className="dashboard-item col-span-3 h-44">
                         <FileInput>
                             <div className="text-2xl">
                                 Upload a file
                             </div>
                         </FileInput>
                     </div>
+                    <DashboardItem name={session?.user?.name || "no user"}>
+                        {
+                            session?.user?.image 
+                            && 
+                            <Image 
+                                src={session.user.image} 
+                                alt="user profile" 
+                                className="rounded-full h-16 w-16" 
+                                width={128}
+                                height={128}
+                            />
+                        }
+                    </DashboardItem>
+
                 </div>
             </div>
         );
