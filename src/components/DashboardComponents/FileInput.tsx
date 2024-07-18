@@ -3,6 +3,7 @@
 import { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 import "@styles/dashboard.css";
+import { classifySparkFitImages } from "@/utils/helpers";
 
 interface FileInputProps {
     children?: React.ReactNode;
@@ -10,24 +11,18 @@ interface FileInputProps {
 
 export default function FileInput({ children }: FileInputProps) {
     const onDrop = useCallback(((acceptedFiles : File[]) => {
+        const formData = new FormData();
+        const API_URL = process.env.NEXT_PUBLIC_API_URL || "";
+
         acceptedFiles.forEach((file) => {
-            const reader = new FileReader();
-
-            reader.onerror = () => {
-                console.log("Error reading file");
-            }
-            
-            reader.onabort = () => {
-                console.log("File reading aborted");
-            }
-
-            reader.onload = () => {
-                const binaryStr = reader.result;
-                console.log(binaryStr);
-            }
-
-            reader.readAsArrayBuffer(file);
+            formData.append("files", file);
         });
+        
+        classifySparkFitImages(formData)
+            .then((result) => {
+                console.log(result);
+            })
+        
     }), []);
 
     const {getRootProps, getInputProps} = useDropzone({onDrop});
