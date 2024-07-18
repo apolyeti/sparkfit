@@ -50,6 +50,7 @@ export async function getWeatherData(API_KEY: string, lat: number, lon: number):
 
 export async function classifySparkFitImages(form: FormData): Promise<SparkFitImage[]> {
     const apiUrl : string = process.env.NEXT_PUBLIC_API_URL || "";
+    console.log(form)
 
     const response : Response = await fetch(`${apiUrl}/classifyImages`, {
         method: "POST",
@@ -60,17 +61,19 @@ export async function classifySparkFitImages(form: FormData): Promise<SparkFitIm
     });
     const data = await response.json();
 
-    const result = data.results.map((image: any) => {
+    const result : SparkFitImage[] = data.results.map((image: any) => {
         const sparkFitImage: SparkFitImage = {
             name: image.name,
             file_name: image.file_name,
             data: image.data,
-            fabric: image.fabric,
-            color: image.color,
-            fit: image.fit,
+            fabric: null,
+            color: null,
+            fit: null,
         };
         return sparkFitImage;
     });
+
+    console.log("RESULT BEFORE SENDING ", result);
 
     return result;
 }

@@ -3,6 +3,7 @@
 import { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 import "@styles/dashboard.css";
+import { classifySparkFitImages } from "@/utils/helpers";
 
 interface FileInputProps {
     children?: React.ReactNode;
@@ -11,21 +12,20 @@ interface FileInputProps {
 export default function FileInput({ children }: FileInputProps) {
     const onDrop = useCallback(((acceptedFiles : File[]) => {
         const formData = new FormData();
+        const API_URL = process.env.NEXT_PUBLIC_API_URL || "";
 
         acceptedFiles.forEach((file) => {
             formData.append("files", file);
         });
 
-        const apiURL = process.env.NEXT_PUBLIC_API_URL || "NO API URL FOUND";
-
-        fetch(`${apiURL}/clothes/classify`, {
+        const results = fetch(`${API_URL}/clothes/classify`, {
             method: "POST",
             body: formData,
-        })
-        .then((response) => response.json())
+        }).then((response) => response.json())
         .then((data) => {
             console.log(data);
-        })
+        });
+        
     }), []);
 
     const {getRootProps, getInputProps} = useDropzone({onDrop});
