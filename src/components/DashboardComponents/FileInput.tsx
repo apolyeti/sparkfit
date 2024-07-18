@@ -17,14 +17,11 @@ export default function FileInput({ children }: FileInputProps) {
         acceptedFiles.forEach((file) => {
             formData.append("files", file);
         });
-
-        const results = fetch(`${API_URL}/clothes/classify`, {
-            method: "POST",
-            body: formData,
-        }).then((response) => response.json())
-        .then((data) => {
-            console.log(data);
-        });
+        
+        classifySparkFitImages(formData)
+            .then((result) => {
+                console.log(result);
+            })
         
     }), []);
 

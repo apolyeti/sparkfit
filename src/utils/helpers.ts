@@ -52,11 +52,8 @@ export async function classifySparkFitImages(form: FormData): Promise<SparkFitIm
     const apiUrl : string = process.env.NEXT_PUBLIC_API_URL || "";
     console.log(form)
 
-    const response : Response = await fetch(`${apiUrl}/classifyImages`, {
+    const response : Response = await fetch(`${apiUrl}/clothes/classify`, {
         method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
         body: form
     });
     const data = await response.json();
@@ -72,8 +69,6 @@ export async function classifySparkFitImages(form: FormData): Promise<SparkFitIm
         };
         return sparkFitImage;
     });
-
-    console.log("RESULT BEFORE SENDING ", result);
 
     return result;
 }
