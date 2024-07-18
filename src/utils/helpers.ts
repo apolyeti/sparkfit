@@ -1,4 +1,4 @@
-import type { UserLocationInfo } from "@utils/types";
+import type { UserLocationInfo, SparkFitImage } from "@utils/types";
 
 export function storageAvailable(type: 'localStorage' | 'sessionStorage'): boolean {
     let storage: Storage | null = null;
@@ -19,19 +19,6 @@ export function storageAvailable(type: 'localStorage' | 'sessionStorage'): boole
         );
     }
 }
-
-
-// TODO: Make this API call on the Flask backend instead.
-// export async function getWeatherData(API_KEY: string, lat: number, lon: number): Promise<any> {
-//     return fetch(`http://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${lat},${lon}`)
-//         .then((response) => response.json())
-//         .then((data) => {
-//             return data;
-//         })
-//         .catch((error) => {
-//             console.error('Error:', error);
-//         });
-// }
 
 export async function getWeatherData(API_KEY: string, lat: number, lon: number): Promise<UserLocationInfo> {
     const apiUrl : string = process.env.NEXT_PUBLIC_API_URL || "";
@@ -59,4 +46,31 @@ export async function getWeatherData(API_KEY: string, lat: number, lon: number):
     };
 
     return weatherData;
+}
+
+export async function classifySparkFitImages(form: FormData): Promise<SparkFitImage[]> {
+    const apiUrl : string = process.env.NEXT_PUBLIC_API_URL || "";
+
+    const response : Response = await fetch(`${apiUrl}/classifyImages`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: form
+    });
+    const data = await response.json();
+
+    const result = data.results.map((image: any) => {
+        const sparkFitImage: SparkFitImage = {
+            name: image.name,
+            file_name: image.file_name,
+            data: image.data,
+            fabric: image.fabric,
+            color: image.color,
+            fit: image.fit,
+        };
+        return sparkFitImage;
+    });
+
+    return result;
 }

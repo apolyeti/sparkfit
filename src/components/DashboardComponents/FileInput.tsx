@@ -10,24 +10,22 @@ interface FileInputProps {
 
 export default function FileInput({ children }: FileInputProps) {
     const onDrop = useCallback(((acceptedFiles : File[]) => {
+        const formData = new FormData();
+
         acceptedFiles.forEach((file) => {
-            const reader = new FileReader();
-
-            reader.onerror = () => {
-                console.log("Error reading file");
-            }
-            
-            reader.onabort = () => {
-                console.log("File reading aborted");
-            }
-
-            reader.onload = () => {
-                const binaryStr = reader.result;
-                console.log(binaryStr);
-            }
-
-            reader.readAsArrayBuffer(file);
+            formData.append("files", file);
         });
+
+        const apiURL = process.env.NEXT_PUBLIC_API_URL || "NO API URL FOUND";
+
+        fetch(`${apiURL}/clothes/classify`, {
+            method: "POST",
+            body: formData,
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(data);
+        })
     }), []);
 
     const {getRootProps, getInputProps} = useDropzone({onDrop});
