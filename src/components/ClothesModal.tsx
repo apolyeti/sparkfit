@@ -1,23 +1,26 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import "@styles/dashboard.css";
+"use client";
+import React from 'react';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 
 interface ClothesModalProps {
-    isOpen: boolean,
-    onClose: () => void,
-    children?: React.ReactNode
+    isOpen: boolean;
+    onClose: () => void;
+    children: React.ReactNode;
 }
 
 export default function ClothesModal({ isOpen, onClose, children }: ClothesModalProps) {
-    if (!isOpen) return null;
-
-    return ReactDOM.createPortal(
-        <div className="modal-overlay">
-            <div className="modal">
-                <button onClick={onClose} className="modal-close">Close</button>
-                {children}
-            </div>
-        </div>,
-        document.getElementById("modal-root") as HTMLElement
+    return (
+        <Modal show={isOpen} onHide={onClose}>
+            <Modal.Header closeButton>
+                <Modal.Title>Modal heading</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>{children}</Modal.Body>
+            <Button variant="secondary" onClick={onClose}>
+                Close
+            </Button>
+        </Modal>
     );
 }
+
+

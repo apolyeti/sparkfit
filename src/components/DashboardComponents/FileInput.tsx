@@ -20,7 +20,9 @@ export default function FileInput({ children }: FileInputProps) {
         const formData = new FormData();
         const API_URL = process.env.NEXT_PUBLIC_API_URL || "";
 
+
         acceptedFiles.forEach((file) => {
+            const reader = new FileReader();
             formData.append("files", file);
         });
         
@@ -46,24 +48,13 @@ export default function FileInput({ children }: FileInputProps) {
                 <input {...getInputProps()} />
                 {children}
             </div>
-            <ClothesModal
-                isOpen={modalOpen}
-                onClose={closeModal}
-            >
-                <h2>
-                    Uploaded Images
-                </h2>
-                <div className="images-container">
-                    {images.map((file, index) => (
-                        <div key={index} className="image-item">
-                            <Image
-                                src={file.file_name}
-                                alt={file.name}
-                            />
-                            <p>{file.name}</p>
-                        </div>
-                    ))}
-                </div>
+            <ClothesModal isOpen={modalOpen} onClose={closeModal}>
+                {images.map((image) => (
+                    <div key={image.file_name}>
+                        <Image src={image.data} alt={image.file_name} width={100} height={100} />
+                        <p>{image.name}</p>
+                    </div>
+                ))}
             </ClothesModal>
         </>
     );
