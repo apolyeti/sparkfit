@@ -9,12 +9,12 @@ import Image from "next/image";
 import type { SparkFitImage } from "@utils/types";
 
 interface FileInputProps {
+    setImages: (images: SparkFitImage[]) => void;
+    setModalOpen: (open: boolean) => void;
     children?: React.ReactNode;
 }
 
-export default function FileInput({ children }: FileInputProps) {
-    const [modalOpen, setModalOpen] = useState(false);
-    const [images, setImages] = useState<SparkFitImage[]>([]);
+export default function FileInput({ setImages, setModalOpen, children }: FileInputProps) {
 
     const onDrop = useCallback(((acceptedFiles : File[]) => {
         const formData = new FormData();
@@ -37,10 +37,6 @@ export default function FileInput({ children }: FileInputProps) {
 
     const {getRootProps, getInputProps} = useDropzone({onDrop});
 
-    const closeModal = () => {
-        setModalOpen(false);
-    }
-
     // make sure the text is in the very center and large
     return (
         <>
@@ -48,14 +44,18 @@ export default function FileInput({ children }: FileInputProps) {
                 <input {...getInputProps()} />
                 {children}
             </div>
-            <ClothesModal isOpen={modalOpen} onClose={closeModal}>
+            {/* <ClothesModal isOpen={modalOpen} onClose={closeModal}>
                 {images.map((image) => (
                     <div key={image.file_name}>
-                        <Image src={image.data} alt={image.file_name} width={100} height={100} />
-                        <p>{image.name}</p>
+                        <Image src={image.data} alt={image.file_name} width={100} height={100}/>
+                        <div>
+                            {image.names.map((name) => (
+                                <span key={name}>{name}</span>
+                            ))}
+                        </div>
                     </div>
                 ))}
-            </ClothesModal>
+            </ClothesModal> */}
         </>
     );
 }

@@ -11,9 +11,9 @@ interface ClothesModalProps {
 
 export default function ClothesModal({ isOpen, onClose, children }: ClothesModalProps) {
     return (
-        <Modal show={isOpen} onHide={onClose}>
+        <Modal show={isOpen} onHide={onClose} centered>
             <Modal.Header closeButton>
-                <Modal.Title>Modal heading</Modal.Title>
+                <Modal.Title> Clothes </Modal.Title>
             </Modal.Header>
             <Modal.Body>{children}</Modal.Body>
             <Button variant="secondary" onClick={onClose}>

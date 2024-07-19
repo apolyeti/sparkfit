@@ -1,5 +1,5 @@
 export type SparkFitImage  = {
-    name: string,
+    names: string[],
     file_name: string,
     data: string,
     fabric: string | null,
