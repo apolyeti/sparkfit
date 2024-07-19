@@ -60,7 +60,7 @@ export async function classifySparkFitImages(form: FormData): Promise<SparkFitIm
 
     const result : SparkFitImage[] = data.results.map((image: any) => {
         const sparkFitImage: SparkFitImage = {
-            name: image.name,
+            names: image.predicted_classes,
             file_name: image.file_name,
             data: image.data,
             fabric: null,
