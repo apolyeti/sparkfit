@@ -9,6 +9,7 @@ import FileInput from "@/components/DashboardComponents/FileInput";
 import Image from "next/image";
 import "@styles/dashboard.css";
 import ClothesModal from "@components/ClothesModal";
+import ClothesEntry from "@/components/ClothesEntry";
 
 import type { SparkFitImage } from "@utils/types";
 
@@ -46,15 +47,9 @@ export default function Dashboard() {
            <ClothesModal isOpen={modalOpen} onClose={closeModal}>
                 <div className="images-container">
                     {images.map((image) => (
-                        <div key={image.file_name} className="image-item">
-                            <Image src={image.data} alt={image.file_name} width={100} height={100} />
-                            <div>
-                                {image.names.map((name) => (
-                                    <span key={name}>{name}</span>
-                                ))}
-                            </div>
-                        </div>
+                        <ClothesEntry image={image} key={image.file_name} />
                     ))}
+
                 </div>
             </ClothesModal>
             <div className="p-5 w-full">
