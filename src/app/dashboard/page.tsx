@@ -45,12 +45,9 @@ export default function Dashboard() {
         return (
             <>
            <ClothesModal isOpen={modalOpen} onClose={closeModal}>
-                <div className="images-container">
-                    {images.map((image) => (
-                        <ClothesEntry image={image} key={image.file_name} />
-                    ))}
-
-                </div>
+                {images.map((image) => (
+                    <ClothesEntry key={image.file_name} image={image} />
+                ))}
             </ClothesModal>
             <div className="p-5 w-full">
                 <div className="grid grid-cols-3 gap-4">
