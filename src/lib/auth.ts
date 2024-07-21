@@ -1,6 +1,7 @@
 import NextAuth, { NextAuthConfig} from "next-auth";
 import GitHub from "next-auth/providers/github";
 import type { Provider } from "next-auth/providers";
+import { signInUser } from "@/utils/helpers";
 
 const providers: Provider[] = [
     GitHub,
@@ -22,7 +23,15 @@ const authConfig: NextAuthConfig = {
     },
     callbacks: {
         async signIn({user, account, profile}) {
-            return true
+            // check for email and name
+            if (profile) {
+                const { email, name } = profile;
+                if (email && name) {
+                    await signInUser(email, name);
+                }
+                return true;
+            }
+            return false;
         },
 
         async redirect({ url, baseUrl }) {
