@@ -11,7 +11,9 @@ const Sidebar = () => {
                     </Link>
                 </div>
                 <div className="mb-6">
-                    link 1
+                    <Link href="/auth">
+                        Sign Out
+                    </Link>
                 </div>
                 <div className="mb-6">
                     link 2

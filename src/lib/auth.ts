@@ -18,16 +18,22 @@ export const providerMap = providers.map((provider) => {
 const authConfig: NextAuthConfig = {
     providers,
     pages: {
-        signIn: "/signin",
+        signIn: "/auth",
     },
     callbacks: {
         async signIn({user, account, profile}) {
             return true
         },
 
-        async redirect({url, baseUrl}) {
-            return url.startsWith(baseUrl) ? url : baseUrl
-        }
+        async redirect({ url, baseUrl }) {
+            // Check if the url starts with the baseUrl to prevent open redirects
+            if (url.startsWith(baseUrl)) {
+                return url;
+            } else if (url.startsWith("/")) {
+                return new URL(url, baseUrl).toString();
+            }
+            return baseUrl;
+        },
     },
 }
 
