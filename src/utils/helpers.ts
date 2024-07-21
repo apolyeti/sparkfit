@@ -72,3 +72,23 @@ export async function classifySparkFitImages(form: FormData): Promise<SparkFitIm
 
     return result;
 }
+
+export async function signInUser(email: string, name: string): Promise<void> {
+    const first_name = name.split(" ")[0];
+    const last_name = name.split(" ")[1];
+    const clothes: SparkFitImage[] = [];
+
+    const apiUrl : string = process.env.NEXT_PUBLIC_API_URL || "";
+    const response : Response = await fetch(`${apiUrl}/user/add`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            email,
+            first_name,
+            last_name,
+            clothes,
+        }),
+    });
+}
