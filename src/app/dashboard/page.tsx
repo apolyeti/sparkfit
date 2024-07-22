@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
-import { getWeatherData } from "@/utils/helpers";
+import { getWeatherData, addUserClothes } from "@/utils/helpers";
 import type { UserLocationInfo } from "@/utils/types";
 import DashboardItem from "@/components/DashboardComponents/DashboardItem";
 import FileInput from "@/components/DashboardComponents/FileInput";
@@ -18,6 +18,8 @@ export default function Dashboard() {
     const [userLocationInfo, setUserLocationInfo] = useState<UserLocationInfo | null>(null);
     const [modalOpen, setModalOpen] = useState(false);
     const [images, setImages] = useState<SparkFitImage[]>([]);
+
+
 
     
     useEffect(() => {
@@ -40,17 +42,21 @@ export default function Dashboard() {
         );
     }
 
-    // const handleSubmit = () => {
-    //     if (session?.user?.email) {
-    //         const formData = new FormData();
-    //         images.forEach((image) => {
-    //             formData.append("files", image.data);
-    //         });
-    //     }
-    // }
+
 
     const closeModal = () => {
         setModalOpen(false);
+    }
+
+    const handleSubmit = async () => {
+        if (session?.user?.email) {
+            try {
+                await addUserClothes(session.user.email, images);
+                setModalOpen(false);
+            } catch (error) {
+                console.error(error);
+            }
+        }
     }
     
         return (
@@ -63,7 +69,7 @@ export default function Dashboard() {
                         onUpdate={handleUpdateImages}
                     />
                 ))}
-                <button className="font-bold" onClick={() => console.log(images)}>
+                <button className="font-bold" onClick={handleSubmit}>
                     Submit
                 </button>
             </ClothesModal>

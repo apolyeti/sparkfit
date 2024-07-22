@@ -60,12 +60,15 @@ export async function classifySparkFitImages(form: FormData): Promise<SparkFitIm
 
     const result : SparkFitImage[] = data.results.map((image: any) => {
         const sparkFitImage: SparkFitImage = {
-            names: image.predicted_classes,
+            photo_id: image.photo_id,
+            predicted_classes: image.predicted_classes,
             file_name: image.file_name,
             data: image.data,
+            data_url: image.data_url,
             fabric: null,
             color: null,
             fit: null,
+            category: image.category,
         };
         return sparkFitImage;
     });
@@ -91,4 +94,21 @@ export async function signInUser(email: string, name: string): Promise<void> {
             clothes,
         }),
     });
+}
+
+export async function addUserClothes(email: string, clothes: SparkFitImage[]): Promise<void> {
+    const apiUrl : string = process.env.NEXT_PUBLIC_API_URL || "";
+    const response : Response = await fetch(`${apiUrl}/clothes/add`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            email,
+            clothes,
+        }),
+    });
+
+    const data = await response.json();
+    console.log(data);
 }

@@ -13,7 +13,7 @@ export default function ClothesEntry({ image, onUpdate }: ClothesEntryProps) {
     const [color, setColor] = useState(image.color || "");
     const [fabric, setFabric] = useState(image.fabric || "");
     const [fit, setFit] = useState(image.fit || "");
-    const [category, setCategory] = useState(image.names[0] || "");
+    const [category, setCategory] = useState(image.category || "");
     const [otherCategory, setOtherCategory] = useState("");
 
     const handleUpdate = () => {
@@ -48,7 +48,7 @@ export default function ClothesEntry({ image, onUpdate }: ClothesEntryProps) {
     return (
         <div className="flex flex-col items-center">
             <Image 
-                src={image.data} 
+                src={image.data_url} 
                 alt={image.file_name} 
                 width={50} height={50}
                 style={{width: "auto", height: "auto"}}
@@ -59,7 +59,7 @@ export default function ClothesEntry({ image, onUpdate }: ClothesEntryProps) {
                     onChange={handleNameChange}
                     className="clothing-select"
                 >
-                    {image.names.map((name) => (
+                    {image.predicted_classes.map((name) => (
                         <option key={name} value={name}>{name}</option>
                     ))}
                     <option value="other">Other</option>
