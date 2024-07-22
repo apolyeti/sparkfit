@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
-import { getWeatherData } from "@/utils/helpers";
+import { getWeatherData, addUserClothes } from "@/utils/helpers";
 import type { UserLocationInfo } from "@/utils/types";
 import DashboardItem from "@/components/DashboardComponents/DashboardItem";
 import FileInput from "@/components/DashboardComponents/FileInput";
@@ -19,6 +19,8 @@ export default function Dashboard() {
     const [modalOpen, setModalOpen] = useState(false);
     const [images, setImages] = useState<SparkFitImage[]>([]);
 
+
+
     
     useEffect(() => {
         const API_KEY = process.env.NEXT_PUBLIC_WEATHER_API_KEY || "NO API KEY FOUND";
@@ -32,22 +34,44 @@ export default function Dashboard() {
         }
     }, []);
 
+    const handleUpdateImages = (updatedImage : SparkFitImage) => {
+        setImages((prevImages) =>
+            prevImages.map((image) => 
+                image.file_name === updatedImage.file_name ? updatedImage : image
+            )
+        );
+    }
 
-    // use tailwindcss to make grid for dashboard
-    // with each dashboard item just being
-    // header1.. 2..
-    // and each content just content 1.. 2..
+
 
     const closeModal = () => {
         setModalOpen(false);
+    }
+
+    const handleSubmit = async () => {
+        if (session?.user?.email) {
+            try {
+                await addUserClothes(session.user.email, images);
+                setModalOpen(false);
+            } catch (error) {
+                console.error(error);
+            }
+        }
     }
     
         return (
             <>
            <ClothesModal isOpen={modalOpen} onClose={closeModal}>
                 {images.map((image) => (
-                    <ClothesEntry key={image.file_name} image={image} />
+                    <ClothesEntry 
+                        key={image.file_name} 
+                        image={image} 
+                        onUpdate={handleUpdateImages}
+                    />
                 ))}
+                <button className="font-bold" onClick={handleSubmit}>
+                    Submit
+                </button>
             </ClothesModal>
             <div className="p-5 w-full">
                 <div className="grid grid-cols-3 gap-4">

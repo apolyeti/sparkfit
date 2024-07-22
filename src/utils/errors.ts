@@ -1,5 +1,3 @@
-// make custom error class
-
 export class SparkFitError extends Error {
     constructor(message: string, public statusCode: number) {
         super(message);
