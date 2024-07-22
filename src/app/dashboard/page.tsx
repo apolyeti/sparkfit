@@ -32,11 +32,22 @@ export default function Dashboard() {
         }
     }, []);
 
+    const handleUpdateImages = (updatedImage : SparkFitImage) => {
+        setImages((prevImages) =>
+            prevImages.map((image) => 
+                image.file_name === updatedImage.file_name ? updatedImage : image
+            )
+        );
+    }
 
-    // use tailwindcss to make grid for dashboard
-    // with each dashboard item just being
-    // header1.. 2..
-    // and each content just content 1.. 2..
+    // const handleSubmit = () => {
+    //     if (session?.user?.email) {
+    //         const formData = new FormData();
+    //         images.forEach((image) => {
+    //             formData.append("files", image.data);
+    //         });
+    //     }
+    // }
 
     const closeModal = () => {
         setModalOpen(false);
@@ -46,8 +57,15 @@ export default function Dashboard() {
             <>
            <ClothesModal isOpen={modalOpen} onClose={closeModal}>
                 {images.map((image) => (
-                    <ClothesEntry key={image.file_name} image={image} />
+                    <ClothesEntry 
+                        key={image.file_name} 
+                        image={image} 
+                        onUpdate={handleUpdateImages}
+                    />
                 ))}
+                <button className="font-bold" onClick={() => console.log(images)}>
+                    Submit
+                </button>
             </ClothesModal>
             <div className="p-5 w-full">
                 <div className="grid grid-cols-3 gap-4">

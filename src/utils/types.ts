@@ -5,6 +5,7 @@ export type SparkFitImage  = {
     fabric: string | null,
     color: string | null,
     fit: string | null,
+    category?: string | null,
 }
 
 export type UserLocationInfo = {
