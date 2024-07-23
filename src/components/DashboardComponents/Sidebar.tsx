@@ -11,7 +11,7 @@ const Sidebar = () => {
                     </Link>
                 </div>
                 <div className="mb-6">
-                    <Link href="/auth">
+                    <Link href="/auth" as={`/auth`}>
                         Sign Out
                     </Link>
                 </div>

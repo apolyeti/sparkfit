@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
-import { getWeatherData, addUserClothes } from "@/utils/helpers";
+import { getWeatherData, addUserClothes, fetchUserClothes } from "@/utils/helpers";
 import type { UserLocationInfo } from "@/utils/types";
 import DashboardItem from "@/components/DashboardComponents/DashboardItem";
 import FileInput from "@/components/DashboardComponents/FileInput";
@@ -19,6 +19,8 @@ export default function Dashboard() {
     const [modalOpen, setModalOpen] = useState(false);
     const [images, setImages] = useState<SparkFitImage[]>([]);
 
+    const [userCloset, setUserCloset] = useState<SparkFitImage[]>([]);
+
 
 
     
@@ -33,6 +35,16 @@ export default function Dashboard() {
             );
         }
     }, []);
+
+    useEffect(() => {
+        const fetchUserClothesData = async () => {
+            if (session?.user?.email) {
+                const clothes = await fetchUserClothes(session.user.email);
+                setUserCloset(clothes);
+            }
+        }
+        fetchUserClothesData();
+    }, [session?.user?.email]);
 
     const handleUpdateImages = (updatedImage : SparkFitImage) => {
         setImages((prevImages) =>
@@ -107,8 +119,26 @@ export default function Dashboard() {
                             />
                         }
                     </DashboardItem>
-                    <DashboardItem name="Humidity" className="col-span-2 h-72">
-                        {userLocationInfo?.humidity}%
+                    <DashboardItem name="Closet" className="col-span-2 h-72">
+                        <div className="grid grid-cols-3 gap-4">
+                            {userCloset.map((image) => (
+                                <>
+                                <Image 
+                                    key={image.file_name} 
+                                    src={image.data_url} 
+                                    alt={image.file_name} 
+                                    width={128} 
+                                    height={128} 
+                                />
+                                <span>
+                                    <p>{image.color}</p>
+                                    <p>{image.fit}</p>
+                                    <p>{image.fabric}</p>
+                                    <p>{image.category}</p>
+                                </span>
+                                </>
+                            ))}
+                        </div>
                     </DashboardItem>
 
                 </div>

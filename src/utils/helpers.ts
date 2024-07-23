@@ -112,3 +112,37 @@ export async function addUserClothes(email: string, clothes: SparkFitImage[]): P
     const data = await response.json();
     console.log(data);
 }
+
+export async function fetchUserClothes(email: string): Promise<SparkFitImage[]> {
+    const apiUrl : string = process.env.NEXT_PUBLIC_API_URL || "";
+    const response : Response = await fetch(`${apiUrl}/clothes/get`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            email,
+        }),
+    });
+
+
+    const data = await response.json();
+
+
+
+    const clothes: SparkFitImage[] = data.clothes.map((image: any) => {
+        const sparkFitImage: SparkFitImage = {
+            photo_id: image.photo_id,
+            predicted_classes: image.predicted_classes,
+            file_name: image.file_name,
+            data_url: image.data_url,
+            fabric: image.fabric,
+            color: image.color,
+            fit: image.fit,
+            category: image.category,
+        };
+        return sparkFitImage;
+    });
+
+    return clothes;
+}
