@@ -51,7 +51,6 @@ export default function Dashboard() {
 
     const getTemperature = () => {
         if (!userLocationInfo) return "";
-        console.log(userLocationInfo.country);
         const isUS = userLocationInfo.country === "United States";
         return isUS
             ? `${userLocationInfo.temp_f}° F`

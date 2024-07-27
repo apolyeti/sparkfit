@@ -155,11 +155,13 @@ export async function generateOutfits(email: string, images: SparkFitImage[], we
     // grab all sparkfitimages and migrate them to dynamo clothing
     const dynamoClothing: DynamoClothing[] = images.map((image: SparkFitImage) => {
         const dynamoCloth: DynamoClothing = {
+            file_name: image.file_name,
             category: image.category,
             color: image.color || "",
             fabric: image.fabric || "",
             fit: image.fit || "",
             photo_id: image.photo_id,
+
         };
         return dynamoCloth;
     });

@@ -25,7 +25,8 @@ export type DynamoClothing = {
     color: string,
     fabric: string,
     fit: string,
-    photo_id: string
+    photo_id: string,
+    file_name: string,
 }
 
 
