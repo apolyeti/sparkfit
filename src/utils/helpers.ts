@@ -1,4 +1,4 @@
-import type { UserLocationInfo, SparkFitImage } from "@utils/types";
+import type { UserLocationInfo, SparkFitImage, OutfitChoices, DynamoClothing } from "@utils/types";
 
 export function storageAvailable(type: 'localStorage' | 'sessionStorage'): boolean {
     let storage: Storage | null = null;
@@ -40,7 +40,8 @@ export async function getWeatherData(API_KEY: string, lat: number, lon: number):
         city: data.location.name,
         country: data.location.country,
         weather: data.current.condition.text,
-        temperature: data.current.temp_f,
+        temp_f: data.current.temp_f,
+        temp_c: data.current.temp_c,
         wind_speed: data.current.wind_mph,
         humidity: data.current.humidity,
     };
@@ -145,4 +146,45 @@ export async function fetchUserClothes(email: string): Promise<SparkFitImage[]> 
     });
 
     return clothes;
+}
+
+export async function generateOutfits(email: string, images: SparkFitImage[], weatherData: UserLocationInfo): Promise<any> {
+
+    console.log('generateOutfits called');
+
+    // grab all sparkfitimages and migrate them to dynamo clothing
+    const dynamoClothing: DynamoClothing[] = images.map((image: SparkFitImage) => {
+        const dynamoCloth: DynamoClothing = {
+            category: image.category,
+            color: image.color || "",
+            fabric: image.fabric || "",
+            fit: image.fit || "",
+            photo_id: image.photo_id,
+        };
+        return dynamoCloth;
+    });
+
+    const temperature = weatherData.country === "United States" ? `${weatherData.temp_f} F` : `${weatherData.temp_c} C`;
+
+    console.log(email, dynamoClothing, temperature, weatherData.weather);
+
+
+    // send the dynamo clothing to the backend
+    const apiUrl : string = process.env.NEXT_PUBLIC_API_URL || "";
+    const response : Response = await fetch(`${apiUrl}/clothes/outfit`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            email,
+            clothes: dynamoClothing,
+            temperature: temperature,
+            condition: weatherData.weather,
+        }),
+    });
+
+    const data = await response.json();
+
+    return data;
 }

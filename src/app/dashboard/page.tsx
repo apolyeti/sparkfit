@@ -2,7 +2,12 @@
 
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
-import { getWeatherData, addUserClothes, fetchUserClothes } from "@/utils/helpers";
+import { 
+    getWeatherData, 
+    addUserClothes, 
+    fetchUserClothes,
+    generateOutfits
+} from "@/utils/helpers";
 import type { UserLocationInfo } from "@/utils/types";
 import DashboardItem from "@/components/DashboardComponents/DashboardItem";
 import FileInput from "@/components/DashboardComponents/FileInput";
@@ -22,8 +27,6 @@ export default function Dashboard() {
     const [userCloset, setUserCloset] = useState<SparkFitImage[]>([]);
 
 
-
-    
     useEffect(() => {
         const API_KEY = process.env.NEXT_PUBLIC_WEATHER_API_KEY || "NO API KEY FOUND";
         if (navigator.geolocation) {
@@ -45,6 +48,27 @@ export default function Dashboard() {
         }
         fetchUserClothesData();
     }, [session?.user?.email]);
+
+    const getTemperature = () => {
+        if (!userLocationInfo) return "";
+        console.log(userLocationInfo.country);
+        const isUS = userLocationInfo.country === "United States";
+        return isUS
+            ? `${userLocationInfo.temp_f}° F`
+            : `${userLocationInfo.temp_c}° C`;
+    };
+
+    const handleGenerateOutfits = async () => {
+        if (session?.user?.email && userLocationInfo) {
+            try {
+                const outfitChoices = await generateOutfits(session.user.email, userCloset, userLocationInfo);
+                console.log(outfitChoices);
+            } catch (error) {
+                console.error(error);
+            }
+        }
+    }
+
 
     const handleUpdateImages = (updatedImage : SparkFitImage) => {
         setImages((prevImages) =>
@@ -91,7 +115,7 @@ export default function Dashboard() {
                         {userLocationInfo?.city}, {userLocationInfo?.country}
                     </DashboardItem>
                     <DashboardItem name="Temperature">
-                        {userLocationInfo?.temperature} F
+                        {getTemperature()}
                     </DashboardItem>
                     <DashboardItem name="Wind Speed">
                         {userLocationInfo?.wind_speed} mph
@@ -140,7 +164,11 @@ export default function Dashboard() {
                             ))}
                         </div>
                     </DashboardItem>
-
+                    <DashboardItem name="Generate Outfits">
+                        <button onClick={handleGenerateOutfits}>
+                            Generate Outfits
+                        </button>
+                    </DashboardItem>
                 </div>
             </div>
             </>

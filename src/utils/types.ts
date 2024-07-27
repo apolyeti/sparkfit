@@ -14,7 +14,26 @@ export type UserLocationInfo = {
     city: string,
     country: string,
     weather: string,
-    temperature: number,
+    temp_c: number,
+    temp_f: number,
     wind_speed: number,
     humidity: number,
+}
+
+export type DynamoClothing = {
+    category: string,
+    color: string,
+    fabric: string,
+    fit: string,
+    photo_id: string
+}
+
+
+export type OutfitChoice = {
+    outfit: DynamoClothing[],
+    reason: string
+}
+
+export type OutfitChoices = {
+    choices: OutfitChoice[]
 }
