@@ -1,30 +1,37 @@
 "use client";
-
-import { useState, useEffect } from "react";
-import { useSession } from "next-auth/react";
+import { 
+    useState, useEffect 
+} from                      "react";
+import Image from           "next/image";
+import { 
+    useSession 
+} from                      "next-auth/react";
 import { 
     getWeatherData, 
     addUserClothes, 
     fetchUserClothes,
     generateOutfits
-} from "@/utils/helpers";
-import type { UserLocationInfo } from "@/utils/types";
-import DashboardItem from "@/components/DashboardComponents/DashboardItem";
-import FileInput from "@/components/DashboardComponents/FileInput";
-import Image from "next/image";
-import "@styles/dashboard.css";
-import ClothesModal from "@components/ClothesModal";
-import ClothesEntry from "@/components/ClothesEntry";
+} from                      "@/utils/helpers";
+import type { 
+    UserLocationInfo,
+    SparkFitImage,
+    OutfitChoices
+} from                      "@/utils/types";
+import DashboardItem from   "@/components/DashboardComponents/DashboardItem";
+import FileInput from       "@/components/DashboardComponents/FileInput";
+import ClothesModal from    "@components/ClothesModal";
+import ClothesEntry from    "@/components/ClothesEntry";
+import OutfitChoicesComponent from "@/components/OutfitChoices";
+import Link from "next/link";
 
-import type { SparkFitImage } from "@utils/types";
 
 export default function Dashboard() {
     const { data: session } = useSession();
     const [userLocationInfo, setUserLocationInfo] = useState<UserLocationInfo | null>(null);
     const [modalOpen, setModalOpen] = useState(false);
     const [images, setImages] = useState<SparkFitImage[]>([]);
-
     const [userCloset, setUserCloset] = useState<SparkFitImage[]>([]);
+    const [outfitChoices, setOutfitChoices] = useState<OutfitChoices | null>(null);
 
 
     useEffect(() => {
@@ -61,6 +68,7 @@ export default function Dashboard() {
         if (session?.user?.email && userLocationInfo) {
             try {
                 const outfitChoices = await generateOutfits(session.user.email, userCloset, userLocationInfo);
+                setOutfitChoices(outfitChoices);
                 console.log(outfitChoices);
             } catch (error) {
                 console.error(error);
@@ -167,6 +175,7 @@ export default function Dashboard() {
                         <button onClick={handleGenerateOutfits}>
                             Generate Outfits
                         </button>
+                        {outfitChoices && <OutfitChoicesComponent outfitChoices={outfitChoices} />}
                     </DashboardItem>
                 </div>
             </div>

@@ -148,7 +148,7 @@ export async function fetchUserClothes(email: string): Promise<SparkFitImage[]> 
     return clothes;
 }
 
-export async function generateOutfits(email: string, images: SparkFitImage[], weatherData: UserLocationInfo): Promise<any> {
+export async function generateOutfits(email: string, images: SparkFitImage[], weatherData: UserLocationInfo): Promise<OutfitChoices> {
 
     console.log('generateOutfits called');
 
@@ -161,7 +161,7 @@ export async function generateOutfits(email: string, images: SparkFitImage[], we
             fabric: image.fabric || "",
             fit: image.fit || "",
             photo_id: image.photo_id,
-
+            data_url: "",
         };
         return dynamoCloth;
     });
@@ -179,7 +179,7 @@ export async function generateOutfits(email: string, images: SparkFitImage[], we
             "Content-Type": "application/json",
         },
         body: JSON.stringify({
-            email,
+            email: email,
             clothes: dynamoClothing,
             temperature: temperature,
             condition: weatherData.weather,
