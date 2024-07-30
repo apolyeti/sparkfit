@@ -19,9 +19,9 @@ export default function OutfitChoicesComponent({ outfitChoices }: OutfitChoicesC
                                 <div key={clothing.photo_id} className="flex flex-col items-center justify-center">
                                     <Image
                                         src={clothing.data_url}
-                                        alt={clothing.file_name}
-                                        width={200}
-                                        height={200}
+                                        alt={clothing.category}
+                                        width={300}
+                                        height={300}
                                     />
                                     <p>{clothing.category}</p>
                                 </div>

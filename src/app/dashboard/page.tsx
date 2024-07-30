@@ -22,6 +22,7 @@ import FileInput from       "@/components/DashboardComponents/FileInput";
 import ClothesModal from    "@components/ClothesModal";
 import ClothesEntry from    "@/components/ClothesEntry";
 import OutfitChoicesComponent from "@/components/OutfitChoices";
+import Loading from         "@/components/Loading";
 import Link from "next/link";
 
 
@@ -32,6 +33,10 @@ export default function Dashboard() {
     const [images, setImages] = useState<SparkFitImage[]>([]);
     const [userCloset, setUserCloset] = useState<SparkFitImage[]>([]);
     const [outfitChoices, setOutfitChoices] = useState<OutfitChoices | null>(null);
+    const [loading, setLoading] = useState(false);
+    const [closetExpanded, setClosetExpanded] = useState(false);
+
+    const maxPreviewItems = 3; 
 
 
     useEffect(() => {
@@ -67,8 +72,10 @@ export default function Dashboard() {
     const handleGenerateOutfits = async () => {
         if (session?.user?.email && userLocationInfo) {
             try {
+                setLoading(true);
                 const outfitChoices = await generateOutfits(session.user.email, userCloset, userLocationInfo);
                 setOutfitChoices(outfitChoices);
+                setLoading(false);
                 console.log(outfitChoices);
             } catch (error) {
                 console.error(error);
@@ -89,6 +96,10 @@ export default function Dashboard() {
 
     const closeModal = () => {
         setModalOpen(false);
+    }
+
+    const toggleCloset = () => {
+        setClosetExpanded(!closetExpanded);
     }
 
     const handleSubmit = async () => {
@@ -150,32 +161,51 @@ export default function Dashboard() {
                             />
                         }
                     </DashboardItem>
-                    <DashboardItem name="Closet" className="col-span-2 h-72">
-                        <div className="grid grid-cols-3 gap-4">
-                            {userCloset.map((image) => (
-                                <>
-                                <Image 
-                                    key={image.file_name} 
-                                    src={image.data_url} 
-                                    alt={image.file_name} 
-                                    width={128} 
-                                    height={128} 
-                                />
-                                <span>
-                                    <p>{image.color}</p>
-                                    <p>{image.fit}</p>
-                                    <p>{image.fabric}</p>
-                                    <p>{image.category}</p>
-                                </span>
-                                </>
+                    <DashboardItem name="Closet" className="col-span-2">
+                        <button onClick={toggleCloset} className="font-bold">
+                            {closetExpanded ? "Hide Closet" : "Show More"}
+                        </button>
+                        <div className="grid grid-cols-3 gap-4 mt-4">
+                            {userCloset.slice(0, maxPreviewItems).map((image) => (
+                                <div key={image.file_name} className="closet-item">
+                                    <Image
+                                        src={image.data_url}
+                                        alt={image.file_name}
+                                        width={128}
+                                        height={128}
+                                    />
+                                    <span>
+                                        <p>{image.color}</p>
+                                        <p>{image.fit}</p>
+                                        <p>{image.fabric}</p>
+                                        <p>{image.category}</p>
+                                    </span>
+                                </div>
+                            ))}
+                            {closetExpanded && userCloset.slice(maxPreviewItems).map((image) => (
+                                <div key={image.file_name} className="closet-item">
+                                    <Image
+                                        src={image.data_url}
+                                        alt={image.file_name}
+                                        width={128}
+                                        height={128}
+                                    />
+                                    <span>
+                                        <p>{image.color}</p>
+                                        <p>{image.fit}</p>
+                                        <p>{image.fabric}</p>
+                                        <p>{image.category}</p>
+                                    </span>
+                                </div>
                             ))}
                         </div>
                     </DashboardItem>
                     <DashboardItem name="Generate Outfits">
-                        <button onClick={handleGenerateOutfits}>
+                        <button onClick={handleGenerateOutfits} disabled={loading}>
                             Generate Outfits
                         </button>
-                        {outfitChoices && <OutfitChoicesComponent outfitChoices={outfitChoices} />}
+                        {loading && <Loading />}
+                        {outfitChoices && !loading && <OutfitChoicesComponent outfitChoices={outfitChoices} />}
                     </DashboardItem>
                 </div>
             </div>
