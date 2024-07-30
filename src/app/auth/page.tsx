@@ -1,10 +1,12 @@
 "use client";
 import { useRouter } from "next/navigation"
-import { signIn, signOut } from "next-auth/react"
+import { signIn, signOut, useSession } from "next-auth/react"
 import { providerMap } from "@lib/auth"
 
 export default function SignInPage() {
     const router = useRouter()
+
+    const { data: session } = useSession()
 
     const handleSignIn = async (providerId : string) => {
         try {
@@ -31,7 +33,7 @@ export default function SignInPage() {
 
     return (
         <div className="flex flex-col gap-2">
-            {Object.values(providerMap).map((provider) => (
+            {session ? Object.values(providerMap).map((provider) => (
             <button
                 key={provider.id}
                 onClick={() => handleSignIn(provider.id)}
@@ -39,14 +41,15 @@ export default function SignInPage() {
             >
                 <span>Sign in with {provider.name}</span>
             </button>
-            ))}
+            )) :
+                <button
+                    onClick={handleSignOut}
+                    className="btn-signin"
+                >
+                    <span>Sign out</span>
+                </button> 
+            }
 
-            <button
-                onClick={handleSignOut}
-                className="btn-signin"
-            >
-                <span>Sign out</span>
-            </button>
         </div>
     )
 }
