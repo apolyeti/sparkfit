@@ -33,14 +33,15 @@ export default function SignInPage() {
 
     return (
         <div className="flex flex-col gap-2">
-            {session ? Object.values(providerMap).map((provider) => (
-            <button
-                key={provider.id}
-                onClick={() => handleSignIn(provider.id)}
-                className="btn-signin"
-            >
-                <span>Sign in with {provider.name}</span>
-            </button>
+            {!session?.user ? 
+            Object.values(providerMap).map((provider) => (
+                <button
+                    key={provider.id}
+                    onClick={() => handleSignIn(provider.id)}
+                    className="btn-signin"
+                >
+                    <span>Sign in with {provider.name}</span>
+                </button>
             )) :
                 <button
                     onClick={handleSignOut}
