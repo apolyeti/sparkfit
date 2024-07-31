@@ -3,7 +3,7 @@ import { useDropzone } from "react-dropzone";
 import { useCallback, useState } from "react";
 import "@styles/dashboard.css";
 import { classifySparkFitImages } from "@/utils/helpers";
-import ClothesModal from "@components/ClothesModal";
+import ClothesModal from "@/components/DashboardComponents/ClothesModal";
 import Image from "next/image";
 
 import type { SparkFitImage } from "@utils/types";

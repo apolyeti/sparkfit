@@ -2,7 +2,6 @@
 import { 
     useState, useEffect 
 } from                      "react";
-import Image from           "next/image";
 import { 
     useSession 
 } from                      "next-auth/react";
@@ -19,31 +18,33 @@ import type {
     SparkFitImage,
     OutfitChoices
 } from                      "@/utils/types";
-import DashboardItem from   "@/components/DashboardComponents/DashboardItem";
-import FileInput from       "@/components/DashboardComponents/FileInput";
-import ClothesModal from    "@components/ClothesModal";
-import EditItem from "@/components/DashboardComponents/EditItem";
-import ClothesEntry from    "@/components/ClothesEntry";
-import ClosetItem from      "@/components/DashboardComponents/ClosetItem";
-import DefaultSkeleton from "@/components/DefaultSkeleton";
-import OutfitChoicesComponent from "@/components/OutfitChoices";
-import Loading from         "@/components/Loading";
 
-import Link from "next/link";
-import ProfileCard from "@/components/DashboardComponents/ProfileCard";
+import FileInput                from    "@/components/DashboardComponents/FileInput";
+import ClothesModal             from    "@/components/DashboardComponents/ClothesModal";
+import ClothesEntry             from    "@/components/DashboardComponents/ClothesEntry";
+import EditItem                 from    "@/components/DashboardComponents/EditItem";
+import ClosetItem               from    "@/components/DashboardComponents/ClosetItem";
+import OutfitChoicesComponent   from    "@/components/DashboardComponents/OutfitChoices";
+import ProfileCard              from    "@/components/DashboardComponents/ProfileCard";
+import DefaultSkeleton          from    "@/components/DefaultSkeleton";
+import Loading                  from    "@/components/Loading";
+
 
 
 export default function Dashboard() {
-    const { data: session } = useSession();
-    const [userLocationInfo, setUserLocationInfo] = useState<UserLocationInfo | null>(null);
-    const [modalOpen, setModalOpen] = useState(false);
-    const [images, setImages] = useState<SparkFitImage[]>([]);
-    const [userCloset, setUserCloset] = useState<SparkFitImage[]>([]);
-    const [outfitChoices, setOutfitChoices] = useState<OutfitChoices | null>(null);
-    const [loading, setLoading] = useState(false);
-    const [closetExpanded, setClosetExpanded] = useState(false);
-    const [selectedImage, setSelectedImage] = useState<SparkFitImage | null>(null);
-    const [EditModal, setEditModal] = useState(false);
+    const { data: session }                         = useSession();
+    const [userLocationInfo, setUserLocationInfo]   = useState<UserLocationInfo | null>(null);
+    const [images, setImages]                       = useState<SparkFitImage[]>([]);
+    const [userCloset, setUserCloset]               = useState<SparkFitImage[]>([]);
+    const [selectedImage, setSelectedImage]         = useState<SparkFitImage | null>(null);
+    const [outfitChoices, setOutfitChoices]         = useState<OutfitChoices | null>(null);
+    const [modalOpen, setModalOpen]                 = useState(false);
+    const [loading, setLoading]                     = useState(false);
+    const [closetExpanded, setClosetExpanded]       = useState(false);
+    const [EditModal, setEditModal]                 = useState(false);
+
+
+
     const maxPreviewItems = 6; 
 
 
@@ -190,11 +191,13 @@ export default function Dashboard() {
                             ) : <DefaultSkeleton />}
                         </div>
                     </div>
+
                     <div className="px-4">
                         <FileInput setImages={setImages} setModalOpen={setModalOpen}>
                             <p>Drop pictures of your clothes here!</p>
                         </FileInput>
                     </div>
+
                     <div className="p-4">
                         {userCloset.length > 0 ? (
                             <div>
@@ -217,6 +220,7 @@ export default function Dashboard() {
                             <DefaultSkeleton />
                         )}        
                     </div>
+                    
                     <div className="p-4 text-center flex-col">
                         <button onClick={handleGenerateOutfits} className="outfit-btn">
                             Generate Outfits
@@ -227,6 +231,7 @@ export default function Dashboard() {
                             outfitChoices && <OutfitChoicesComponent outfitChoices={outfitChoices} />
                         )}
                     </div>
+                    
                 </div>
             </>
         );
