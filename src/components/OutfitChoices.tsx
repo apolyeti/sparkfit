@@ -16,12 +16,13 @@ export default function OutfitChoicesComponent({ outfitChoices }: OutfitChoicesC
                         <h2 className="text-2xl font-bold">Choice {index + 1}</h2>
                         <div className="flex flex-row items-center justify-center">
                             {choice.outfit.map((clothing) => (
-                                <div key={clothing.photo_id} className="flex flex-col items-center justify-center">
+                                <div key={clothing.photo_id} className="flex flex-col items-center justify-center px-2">
                                     <Image
                                         src={clothing.data_url}
                                         alt={clothing.category}
                                         width={300}
                                         height={300}
+                                        className="clothes-image"
                                     />
                                     <p>{clothing.category}</p>
                                 </div>

@@ -165,39 +165,41 @@ export default function Dashboard() {
                         <button onClick={toggleCloset} className="font-bold">
                             {closetExpanded ? "Hide Closet" : "Show More"}
                         </button>
-                        <div className="grid grid-cols-3 gap-4 mt-4">
-                            {userCloset.slice(0, maxPreviewItems).map((image) => (
-                                <div key={image.file_name} className="closet-item">
-                                    <Image
-                                        src={image.data_url}
-                                        alt={image.file_name}
-                                        width={128}
-                                        height={128}
-                                    />
-                                    <span>
-                                        <p>{image.color}</p>
-                                        <p>{image.fit}</p>
-                                        <p>{image.fabric}</p>
-                                        <p>{image.category}</p>
-                                    </span>
-                                </div>
-                            ))}
-                            {closetExpanded && userCloset.slice(maxPreviewItems).map((image) => (
-                                <div key={image.file_name} className="closet-item">
-                                    <Image
-                                        src={image.data_url}
-                                        alt={image.file_name}
-                                        width={128}
-                                        height={128}
-                                    />
-                                    <span>
-                                        <p>{image.color}</p>
-                                        <p>{image.fit}</p>
-                                        <p>{image.fabric}</p>
-                                        <p>{image.category}</p>
-                                    </span>
-                                </div>
-                            ))}
+                        <div className={`closet-container ${closetExpanded ? "expanded" : "collapsed"}`}>
+                            <div className="grid grid-cols-3 gap-4 mt-4">
+                                {userCloset.slice(0, maxPreviewItems).map((image) => (
+                                    <div key={image.file_name} className="closet-item">
+                                        <Image
+                                            src={image.data_url}
+                                            alt={image.file_name}
+                                            width={128}
+                                            height={128}
+                                        />
+                                        <span>
+                                            <p>{image.color}</p>
+                                            <p>{image.fit}</p>
+                                            <p>{image.fabric}</p>
+                                            <p>{image.category}</p>
+                                        </span>
+                                    </div>
+                                ))}
+                                {closetExpanded && userCloset.slice(maxPreviewItems).map((image) => (
+                                    <div key={image.file_name} className="closet-item">
+                                        <Image
+                                            src={image.data_url}
+                                            alt={image.file_name}
+                                            width={128}
+                                            height={128}
+                                        />
+                                        <span>
+                                            <p>{image.color}</p>
+                                            <p>{image.fit}</p>
+                                            <p>{image.fabric}</p>
+                                            <p>{image.category}</p>
+                                        </span>
+                                    </div>
+                                ))}
+                            </div>
                         </div>
                     </DashboardItem>
                     <DashboardItem name="Generate Outfits">

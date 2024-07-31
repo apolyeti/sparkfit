@@ -24,20 +24,22 @@
 }
 
 .grid {
+    background-color: #402855;
+    padding: 20px;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(6, 1fr);
     gap: 16px;
 }
 
 .dropzone {
     background-color: #281935;
-    /* take up entire space it can */
     flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
+    justify-content: center;
     height: 100%;
+    padding: 20px;
 }
 
 .dropzone:hover {
@@ -111,4 +113,81 @@
     border-radius: 8px;
     width: 100%;
     margin-bottom: 10px;
+}
+
+.closet-container {
+    position: relative;
+    overflow: hidden;
+    transition: max-height 0.5s ease;
+    background: #402855; /* Match the container background */
+    padding: 1rem; /* Adjust padding as needed */
+}
+
+.closet-container.expanded {
+    max-height: 100vh; /* Allow full expansion */
+}
+
+.closet-container.collapsed {
+    max-height: 150px; /* Adjust the max-height for preview */
+}
+
+.closet-container::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50px; /* Adjust the height to control the gradient */
+    background: linear-gradient(to bottom, rgba(64, 40, 85, 0) 0%, rgba(64, 40, 85, 1) 100%);
+    transition: opacity 0.5s ease;
+}
+
+.closet-container.expanded::after {
+    opacity: 0;
+}
+
+.closet-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.closet-item span {
+    text-align: center;
+}
+
+.clothes-image {
+    width: 150px;
+    height: 150px;
+    object-fit: cover; 
+    border-radius: 8px;
+}
+
+.profile-card {
+    background-color: #402855;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.profile-card-content {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.profile-card-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.dropdown-btn {
+    /* opacity gradient goes to 100 to 0 from up to down */
+    background: linear-gradient(to bottom, rgba(64, 40, 85, 1) 0%, rgba(64, 40, 85, 0) 100%);
+    border: none;
+    /* have border radius only on bottom */
+    border-radius: 0 0 8px 8px;
+    width: 100%;
+    padding: 10px;
 }
