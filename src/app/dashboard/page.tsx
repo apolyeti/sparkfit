@@ -231,7 +231,7 @@ export default function Dashboard() {
                             outfitChoices && <OutfitChoicesComponent outfitChoices={outfitChoices} />
                         )}
                     </div>
-                    
+
                 </div>
             </>
         );
