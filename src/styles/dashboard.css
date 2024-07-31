@@ -124,7 +124,7 @@
 }
 
 .closet-container.expanded {
-    max-height: 100vh; /* Allow full expansion */
+    max-height: none; /* Allow full expansion */
 }
 
 .closet-container.collapsed {
@@ -190,4 +190,61 @@
     border-radius: 0 0 8px 8px;
     width: 100%;
     padding: 10px;
+}
+
+.dropdown-btn:hover {
+    background: linear-gradient(to bottom, rgba(64, 40, 85, 0.8) 0%, rgba(64, 40, 85, 0) 100%);
+    cursor: pointer;
+}
+
+.outfit-btn {
+    background-color: #281935;
+    color: #f7ece1;
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
+    width: 50%;
+    margin-bottom: 10px;
+}
+
+.outfit-btn:hover {
+    background-color: #342145;
+    cursor: pointer;
+}
+
+.navbar {
+    background-color: #281935;
+    color: #f7ece1;
+    border-radius: 8px;
+    /* padding from top */
+}
+
+.save-btn {
+    background-color: #2d1e3a;
+    color: #f7ece1;
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.save-btn:hover {
+    background-color: #4f3368;
+    cursor: pointer;
+}
+
+.delete-btn {
+    background-color: #4b1414;
+    color: #f7ece1;
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.delete-btn:hover {
+    background-color: #5c1a1a;
+    cursor: pointer;
 }

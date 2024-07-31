@@ -32,3 +32,14 @@ html, body {
         text-wrap: balance;
     }
 }
+
+/* style scrollbar color */
+/* https://css-tricks.com/almanac/properties/s/scrollbar/ */
+/* https://developer.mozilla.org/en-US/docs/Web/CSS/scrollbar-color */
+/* https://developer.mozilla.org/en-US/docs/Web/CSS/scrollbar-width */
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}

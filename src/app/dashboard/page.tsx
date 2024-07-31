@@ -20,10 +20,14 @@ import type {
 import DashboardItem from   "@/components/DashboardComponents/DashboardItem";
 import FileInput from       "@/components/DashboardComponents/FileInput";
 import ClothesModal from    "@components/ClothesModal";
+import EditItem from "@/components/DashboardComponents/EditItem";
 import ClothesEntry from    "@/components/ClothesEntry";
+import ClosetItem from      "@/components/DashboardComponents/ClosetItem";
+import DefaultSkeleton from "@/components/DefaultSkeleton";
 import OutfitChoicesComponent from "@/components/OutfitChoices";
 import Loading from         "@/components/Loading";
 import Link from "next/link";
+import ProfileCard from "@/components/DashboardComponents/ProfileCard";
 
 
 export default function Dashboard() {
@@ -35,8 +39,9 @@ export default function Dashboard() {
     const [outfitChoices, setOutfitChoices] = useState<OutfitChoices | null>(null);
     const [loading, setLoading] = useState(false);
     const [closetExpanded, setClosetExpanded] = useState(false);
-
-    const maxPreviewItems = 3; 
+    const [selectedImage, setSelectedImage] = useState<SparkFitImage | null>(null);
+    const [EditModal, setEditModal] = useState(false);
+    const maxPreviewItems = 6; 
 
 
     useEffect(() => {
@@ -60,6 +65,11 @@ export default function Dashboard() {
         }
         fetchUserClothesData();
     }, [session?.user?.email]);
+
+    const handleEdit = (image: SparkFitImage) => {
+        setSelectedImage(image);
+        setEditModal(true);
+    }
 
     const getTemperature = () => {
         if (!userLocationInfo) return "";
@@ -92,10 +102,12 @@ export default function Dashboard() {
         );
     }
 
-
-
     const closeModal = () => {
         setModalOpen(false);
+    }
+
+    const closeEditModal = () => {
+        setEditModal(false);
     }
 
     const toggleCloset = () => {
@@ -112,105 +124,100 @@ export default function Dashboard() {
             }
         }
     }
+
+    const updateImage = async (updatedImage: SparkFitImage) => {
+        setImages((prevImages) => 
+            prevImages.map((image) => 
+                image.file_name === updatedImage.file_name ? updatedImage : image
+            )
+        );
+    }
+
     
         return (
             <>
-           <ClothesModal isOpen={modalOpen} onClose={closeModal}>
-                {images.map((image) => (
-                    <ClothesEntry 
-                        key={image.file_name} 
-                        image={image} 
-                        onUpdate={handleUpdateImages}
-                    />
-                ))}
-                <button className="font-bold" onClick={handleSubmit}>
-                    Submit
-                </button>
-            </ClothesModal>
-            <div className="p-5 w-full">
-                <div className="grid grid-cols-3 gap-4">
-                    <DashboardItem name="Location">
-                        {userLocationInfo?.city}, {userLocationInfo?.country}
-                    </DashboardItem>
-                    <DashboardItem name="Temperature">
-                        {getTemperature()}
-                    </DashboardItem>
-                    <DashboardItem name="Wind Speed">
-                        {userLocationInfo?.wind_speed} mph
-                    </DashboardItem>
-                    <div className="dashboard-item col-span-3 h-44">
-                        <FileInput
-                            setImages={setImages}
-                            setModalOpen={setModalOpen}
-                        >
-                            <div className="text-2xl">
-                                Upload a file
-                            </div>
+                <ClothesModal isOpen={modalOpen} onClose={closeModal}>
+                    {images.map((image) => (
+                        <ClothesEntry 
+                            key={image.file_name} 
+                            image={image} 
+                            onUpdate={handleUpdateImages}
+                        />
+                    ))}
+                    <button className="font-bold" onClick={handleSubmit}>
+                        Submit
+                    </button>
+                </ClothesModal>
+                <ClothesModal isOpen={EditModal} onClose={closeEditModal}>
+                    {selectedImage && (
+                        <EditItem 
+                            image={selectedImage} 
+                            onUpdate={handleUpdateImages}
+                        />
+                    )}
+                </ClothesModal>
+
+                <div className="flex flex-col justify-between">
+                    <div className="flex flex-row items-center justify-between p-4">
+                        <ProfileCard />
+                        <div>
+                            {userLocationInfo ? (
+                                <div>
+                                    <p>
+                                        Temperature: {getTemperature()}
+                                    </p>
+                                    <p>
+                                        Condition: {userLocationInfo.weather}
+                                    </p>
+                                </div>
+                            ) : <DefaultSkeleton />}
+                        </div>
+                        <div>
+                            {userLocationInfo ? (
+                                <p>
+                                    Location: {userLocationInfo.city}, {userLocationInfo.country}
+                                </p>
+                            ) : <DefaultSkeleton />}
+                        </div>
+                    </div>
+                    <div className="px-4">
+                        <FileInput setImages={setImages} setModalOpen={setModalOpen}>
+                            <p>Drop pictures of your clothes here!</p>
                         </FileInput>
                     </div>
-                    <DashboardItem name={session?.user?.name || "no user"}>
-                        {
-                            session?.user?.image 
-                            && 
-                            <Image 
-                                src={session.user.image} 
-                                alt="user profile" 
-                                className="rounded-full h-16 w-16" 
-                                width={128}
-                                height={128}
-                            />
-                        }
-                    </DashboardItem>
-                    <DashboardItem name="Closet" className="col-span-2">
-                        <button onClick={toggleCloset} className="font-bold">
-                            {closetExpanded ? "Hide Closet" : "Show More"}
-                        </button>
-                        <div className={`closet-container ${closetExpanded ? "expanded" : "collapsed"}`}>
-                            <div className="grid grid-cols-3 gap-4 mt-4">
-                                {userCloset.slice(0, maxPreviewItems).map((image) => (
-                                    <div key={image.file_name} className="closet-item">
-                                        <Image
-                                            src={image.data_url}
-                                            alt={image.file_name}
-                                            width={128}
-                                            height={128}
-                                        />
-                                        <span>
-                                            <p>{image.color}</p>
-                                            <p>{image.fit}</p>
-                                            <p>{image.fabric}</p>
-                                            <p>{image.category}</p>
-                                        </span>
-                                    </div>
-                                ))}
-                                {closetExpanded && userCloset.slice(maxPreviewItems).map((image) => (
-                                    <div key={image.file_name} className="closet-item">
-                                        <Image
-                                            src={image.data_url}
-                                            alt={image.file_name}
-                                            width={128}
-                                            height={128}
-                                        />
-                                        <span>
-                                            <p>{image.color}</p>
-                                            <p>{image.fit}</p>
-                                            <p>{image.fabric}</p>
-                                            <p>{image.category}</p>
-                                        </span>
-                                    </div>
-                                ))}
+                    <div className="p-4">
+                        {userCloset.length > 0 ? (
+                            <div>
+                                <div className="grid grid-cols-6 gap-2">
+                                    {closetExpanded ? (
+                                        userCloset.map((item, index) => (
+                                            <ClosetItem key={index} image={item} handleEdit={() => handleEdit(item)}/>
+                                        ))
+                                    ) : (
+                                        userCloset.slice(0, maxPreviewItems).map((item, index) => (
+                                            <ClosetItem key={index} image={item} handleEdit={() => handleEdit(item)}/>
+                                        ))
+                                    )}
+                                </div>
+                                <div className="dropdown-btn" onClick={toggleCloset}>
+                
+                                </div>
                             </div>
-                        </div>
-                    </DashboardItem>
-                    <DashboardItem name="Generate Outfits">
-                        <button onClick={handleGenerateOutfits} disabled={loading}>
+                        ) : (
+                            <DefaultSkeleton />
+                        )}        
+                    </div>
+                    <div className="p-4 text-center flex-col">
+                        <button onClick={handleGenerateOutfits} className="outfit-btn">
                             Generate Outfits
                         </button>
-                        {loading && <Loading />}
-                        {outfitChoices && !loading && <OutfitChoicesComponent outfitChoices={outfitChoices} />}
-                    </DashboardItem>
+                        {loading ? (
+                            <Loading />
+                        ) : (
+                            outfitChoices && <OutfitChoicesComponent outfitChoices={outfitChoices} />
+                        )}
+                    </div>
                 </div>
-            </div>
             </>
         );
 }

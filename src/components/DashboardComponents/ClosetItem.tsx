@@ -1,13 +1,14 @@
 import type { SparkFitImage } from "@/utils/types";
 import Image from "next/image";
 
-interface ClothesItemProps {
+interface ClothesItemProps extends React.HTMLProps<HTMLDivElement> {
     image: SparkFitImage;
+    handleEdit: (image: SparkFitImage) => void;
 }
 
-export default function ClothesItem({ image }: ClothesItemProps) {
+export default function ClothesItem({ image, handleEdit }: ClothesItemProps) {
     return (
-        <div className="clothes-item">
+        <div className="clothes-item" onClick={()=>handleEdit(image)}>
             <Image 
                 src={image.data_url} 
                 alt={image.file_name} 

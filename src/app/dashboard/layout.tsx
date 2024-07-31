@@ -1,4 +1,4 @@
-import Sidebar from "@/components/DashboardComponents/Sidebar";
+import NavBar from "@/components/DashboardComponents/NavBar";
 import "@styles/dashboard.css";
 interface DashboardLayoutProps {
     children: React.ReactNode;
@@ -6,10 +6,10 @@ interface DashboardLayoutProps {
 
 const Layout = ({ children }: DashboardLayoutProps) => {
     return (
-      <div className="flex">
-        <Sidebar />
-        {children}
-      </div>
+        <div>
+            <NavBar />
+            {children}
+        </div>
     );
   };
   
