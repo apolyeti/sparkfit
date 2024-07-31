@@ -207,3 +207,20 @@ export async function deleteClothing(email: string, photo_id: string): Promise<v
     const data = await response.json();
     console.log(data);
 }
+
+export async function updateClothing(email: string, updatedItem: SparkFitImage): Promise<void> {
+    const apiUrl : string = process.env.NEXT_PUBLIC_API_URL || "";
+    const response : Response = await fetch(`${apiUrl}/clothes/update`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            email : email,
+            updatedItem : updatedItem,
+        }),
+    });
+
+    const data = await response.json();
+    console.log(data);
+}

@@ -3,23 +3,21 @@
 import Image from "next/image";
 import { useState } from "react";
 import { SparkFitImage } from "@/utils/types";
-import { deleteClothing } from "@/utils/helpers";
-import { useSession } from "next-auth/react";
 
-interface ClothesEntryProps extends React.HTMLProps<HTMLDivElement> {
+interface EditItemProps extends React.HTMLProps<HTMLDivElement> {
     image: SparkFitImage;
-    onUpdate: (updatedImage: SparkFitImage) => void;
     handleDelete : (image: SparkFitImage) => void;
+    handleEdit: (updatedImage: SparkFitImage) => void;
+    setSelectedImage: (image: SparkFitImage) => void;
 }
 
-export default function EditItem({ image, onUpdate, handleDelete }: ClothesEntryProps) {
+export default function EditItem({ image, handleDelete, handleEdit, setSelectedImage }: EditItemProps) {
 
     const [color, setColor] = useState(image.color || "");
     const [fabric, setFabric] = useState(image.fabric || "");
     const [fit, setFit] = useState(image.fit || "");
     const [category, setCategory] = useState(image.category || "");
     const [otherCategory, setOtherCategory] = useState("");
-    const { data: session } = useSession();
 
 
     const handleUpdate = () => {
@@ -28,30 +26,10 @@ export default function EditItem({ image, onUpdate, handleDelete }: ClothesEntry
             color,
             fabric,
             fit,
-            category: category === "other" ? otherCategory : category
+            category
         };
-        onUpdate(updatedImage);
+        setSelectedImage(updatedImage);
     }
-
-    const handleNameChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        const value = e.target.value;
-        setCategory(value);
-        if (value !== "other") {
-            handleUpdate();
-        }
-    }
-
-    const handleOtherCategoryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setOtherCategory(e.target.value);
-    }
-
-    const handleOtherNameBlur = () => {
-        if (category === "other") {
-            handleUpdate();
-        }
-    }
-
-    const email = session?.user?.email;
 
     return (
         <div className="flex flex-col items-center">
@@ -65,25 +43,13 @@ export default function EditItem({ image, onUpdate, handleDelete }: ClothesEntry
                 style={{width: "auto", height: "auto"}}
                 className="p-4"
             />
-            <div>
-                <select
-                    value={category}
-                    onChange={handleNameChange}
-                    className="clothing-select"
-                >
-                    <option value="category">{image.category}</option>
-                    <option value="other">Other</option>
-                </select>
-                {category === "other" && (
-                    <input
-                        className="clothing-input"
-                        placeholder="Enter name"
-                        value={otherCategory}
-                        onChange={handleOtherCategoryChange}
-                        onBlur={handleOtherNameBlur}
-                    />
-                )}
-            </div>
+            <input 
+                className="clothing-input"
+                placeholder="Category" 
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+                onBlur={handleUpdate}
+            />
 
             <div>
             <input
@@ -108,7 +74,7 @@ export default function EditItem({ image, onUpdate, handleDelete }: ClothesEntry
                     onBlur={handleUpdate}
                 />
             </div>
-            <button className="save-btn">
+            <button className="save-btn" onClick={() => handleEdit(image)}>
                 Save
             </button>
             <button className="delete-btn" onClick={() => handleDelete(image)}>

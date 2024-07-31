@@ -11,7 +11,8 @@ import {
     addUserClothes, 
     fetchUserClothes,
     generateOutfits,
-    deleteClothing
+    deleteClothing,
+    updateClothing
 } from                      "@/utils/helpers";
 import type { 
     UserLocationInfo,
@@ -95,7 +96,6 @@ export default function Dashboard() {
         }
     }
 
-
     const handleUpdateImages = (updatedImage : SparkFitImage) => {
         setImages((prevImages) =>
             prevImages.map((image) => 
@@ -135,12 +135,10 @@ export default function Dashboard() {
         window.location.reload();
     }
 
-    const updateImage = async (updatedImage: SparkFitImage) => {
-        setImages((prevImages) => 
-            prevImages.map((image) => 
-                image.file_name === updatedImage.file_name ? updatedImage : image
-            )
-        );
+    const updateImage = async () => {
+        if (session && session.user && session.user.email && selectedImage) {
+            await updateClothing(session.user.email, selectedImage);
+        }
     }
 
     
@@ -162,8 +160,9 @@ export default function Dashboard() {
                     {selectedImage && (
                         <EditItem 
                             image={selectedImage} 
-                            onUpdate={handleUpdateImages}
                             handleDelete={handleDelete}
+                            handleEdit={updateImage}
+                            setSelectedImage={setSelectedImage}
                         />
                     )}
                 </ClothesModal>
