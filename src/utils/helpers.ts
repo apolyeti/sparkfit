@@ -190,3 +190,20 @@ export async function generateOutfits(email: string, images: SparkFitImage[], we
 
     return data;
 }
+
+export async function deleteClothing(email: string, photo_id: string): Promise<void> {
+    const apiUrl : string = process.env.NEXT_PUBLIC_API_URL || "";
+    const response : Response = await fetch(`${apiUrl}/clothes/delete`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            email,
+            photo_id,
+        }),
+    });
+
+    const data = await response.json();
+    console.log(data);
+}

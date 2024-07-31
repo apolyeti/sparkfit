@@ -3,19 +3,24 @@
 import Image from "next/image";
 import { useState } from "react";
 import { SparkFitImage } from "@/utils/types";
+import { deleteClothing } from "@/utils/helpers";
+import { useSession } from "next-auth/react";
 
 interface ClothesEntryProps extends React.HTMLProps<HTMLDivElement> {
     image: SparkFitImage;
     onUpdate: (updatedImage: SparkFitImage) => void;
+    handleDelete : (image: SparkFitImage) => void;
 }
 
-export default function EditItem({ image, onUpdate }: ClothesEntryProps) {
+export default function EditItem({ image, onUpdate, handleDelete }: ClothesEntryProps) {
 
     const [color, setColor] = useState(image.color || "");
     const [fabric, setFabric] = useState(image.fabric || "");
     const [fit, setFit] = useState(image.fit || "");
     const [category, setCategory] = useState(image.category || "");
     const [otherCategory, setOtherCategory] = useState("");
+    const { data: session } = useSession();
+
 
     const handleUpdate = () => {
         const updatedImage: SparkFitImage = {
@@ -45,6 +50,8 @@ export default function EditItem({ image, onUpdate }: ClothesEntryProps) {
             handleUpdate();
         }
     }
+
+    const email = session?.user?.email;
 
     return (
         <div className="flex flex-col items-center">
@@ -104,7 +111,7 @@ export default function EditItem({ image, onUpdate }: ClothesEntryProps) {
             <button className="save-btn">
                 Save
             </button>
-            <button className="delete-btn">
+            <button className="delete-btn" onClick={() => handleDelete(image)}>
                 Delete
             </button>
         </div>

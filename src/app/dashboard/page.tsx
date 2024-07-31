@@ -10,7 +10,8 @@ import {
     getWeatherData, 
     addUserClothes, 
     fetchUserClothes,
-    generateOutfits
+    generateOutfits,
+    deleteClothing
 } from                      "@/utils/helpers";
 import type { 
     UserLocationInfo,
@@ -26,6 +27,7 @@ import ClosetItem from      "@/components/DashboardComponents/ClosetItem";
 import DefaultSkeleton from "@/components/DefaultSkeleton";
 import OutfitChoicesComponent from "@/components/OutfitChoices";
 import Loading from         "@/components/Loading";
+
 import Link from "next/link";
 import ProfileCard from "@/components/DashboardComponents/ProfileCard";
 
@@ -125,6 +127,14 @@ export default function Dashboard() {
         }
     }
 
+    const handleDelete = async (image: SparkFitImage) => {
+        if (session && session.user && session.user.email) {
+            await deleteClothing(session.user.email, image.photo_id);
+        }
+        // reload page
+        window.location.reload();
+    }
+
     const updateImage = async (updatedImage: SparkFitImage) => {
         setImages((prevImages) => 
             prevImages.map((image) => 
@@ -153,6 +163,7 @@ export default function Dashboard() {
                         <EditItem 
                             image={selectedImage} 
                             onUpdate={handleUpdateImages}
+                            handleDelete={handleDelete}
                         />
                     )}
                 </ClothesModal>
