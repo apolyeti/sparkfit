@@ -42,6 +42,7 @@ export default function Dashboard() {
     const [loading, setLoading]                     = useState(false);
     const [closetExpanded, setClosetExpanded]       = useState(false);
     const [EditModal, setEditModal]                 = useState(false);
+    const [reload, setReload]                       = useState(false);
 
 
 
@@ -68,7 +69,7 @@ export default function Dashboard() {
             }
         }
         fetchUserClothesData();
-    }, [session?.user?.email]);
+    }, [session?.user?.email, reload]);
 
     const handleEdit = (image: SparkFitImage) => {
         setSelectedImage(image);
@@ -122,6 +123,7 @@ export default function Dashboard() {
             try {
                 await addUserClothes(session.user.email, images);
                 setModalOpen(false);
+                setReload(!reload);
             } catch (error) {
                 console.error(error);
             }
@@ -133,13 +135,15 @@ export default function Dashboard() {
             await deleteClothing(session.user.email, image.photo_id);
         }
         // reload page
-        window.location.reload();
+        setReload(!reload);
     }
 
     const updateImage = async () => {
         if (session && session.user && session.user.email && selectedImage) {
             await updateClothing(session.user.email, selectedImage);
         }
+        setEditModal(false);
+        setReload(!reload);
     }
 
     
