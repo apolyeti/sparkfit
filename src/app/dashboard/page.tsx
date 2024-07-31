@@ -44,10 +44,7 @@ export default function Dashboard() {
     const [EditModal, setEditModal]                 = useState(false);
     const [reload, setReload]                       = useState(false);
 
-
-
     const maxPreviewItems = 6; 
-
 
     useEffect(() => {
         const API_KEY = process.env.NEXT_PUBLIC_WEATHER_API_KEY || "NO API KEY FOUND";
