@@ -30,7 +30,6 @@ export type DynamoClothing = {
     file_name: string,
 }
 
-
 export type OutfitChoice = {
     outfit: DynamoClothing[],
     reason: string
