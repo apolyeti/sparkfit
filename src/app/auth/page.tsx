@@ -2,6 +2,7 @@
 import { useRouter } from "next/navigation";
 import { signIn, signOut, useSession } from "next-auth/react";
 import GithubButton from "react-github-login-button";
+import GoogleButton from "react-google-button";
 import Link from "next/link";
 
 export default function SignInPage() {
@@ -23,7 +24,7 @@ export default function SignInPage() {
 
     return (
         <div className="flex justify-center items-center h-screen">
-            <div className="border-2 flex flex-row rounded-lg w-2/3 h-1/2">
+            <div className="border-2 flex flex-row rounded-lg w-2/3 h-1/3">
                 <div className="flex flex-col items-center justify-center w-1/2 p-4 border-r border-gray-200">
                     <Link className="text-5xl font-bold mb-4" href={"/"}>
                         Sparkfit
@@ -32,14 +33,12 @@ export default function SignInPage() {
                         Get outfit suggestions based on the weather
                     </p>
                 </div>
-                <div className="flex flex-col items-center justify-center w-1/2 p-4">
+                <div className="flex flex-col items-center justify-center w-1/2 p-4 gap-6">
                     <GithubButton onClick={() => handleSignIn("github")} />
-                    <button
+                    <GoogleButton
                         className="mt-4 bg-blue-500 text-white py-2 px-4 rounded"
                         onClick={() => handleSignIn("google")}
-                    >
-                        Sign in with Google
-                    </button>
+                    />
                 </div>
             </div>
         </div>
