@@ -124,6 +124,10 @@ export async function signInUser(email: string, name: string): Promise<void> {
             clothes,
         }),
     });
+
+    const data = await response.json();
+    console.log(data);
+    return data;
 }
 
 /**
