@@ -225,9 +225,9 @@ export default function Dashboard() {
                         )}        
                     </div>
                     
-                    <div className="p-4 text-center flex-col">
+                    <div className="p-4 text-center flex-col text-lg">
                         <button onClick={handleGenerateOutfits} className="outfit-btn" id="outfit-btn">
-                            Generate Outfits
+                            GENERATE
                         </button>
                         {loading ? (
                             <OutfitLoading />
