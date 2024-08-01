@@ -40,12 +40,12 @@ export default function Dashboard() {
     const [userCloset, setUserCloset]               = useState<SparkFitImage[]>([]);
     const [selectedImage, setSelectedImage]         = useState<SparkFitImage | null>(null);
     const [outfitChoices, setOutfitChoices]         = useState<OutfitChoices | null>(null);
-    const [modalOpen, setModalOpen]                 = useState(false);
-    const [loading, setLoading]                     = useState(false);
-    const [closetExpanded, setClosetExpanded]       = useState(false);
-    const [EditModal, setEditModal]                 = useState(false);
-    const [reload, setReload]                       = useState(false);
-
+    const [closetExpanded, setClosetExpanded]       = useState<boolean>(false);
+    const [modalOpen, setModalOpen]                 = useState<boolean>(false);
+    const [EditModal, setEditModal]                 = useState<boolean>(false);
+    const [loading, setLoading]                     = useState<boolean>(false);
+    const [reload, setReload]                       = useState<boolean>(false);
+    
     const maxPreviewItems = 6; 
 
     useEffect(() => {
