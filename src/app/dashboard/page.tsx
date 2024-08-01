@@ -27,6 +27,7 @@ import ClosetItem               from    "@/components/DashboardComponents/Closet
 import OutfitChoicesComponent   from    "@/components/DashboardComponents/OutfitChoices";
 import ProfileCard              from    "@/components/DashboardComponents/ProfileCard";
 import WeatherDisplay           from    "@/components/DashboardComponents/WeatherDisplay";
+import OutfitLoading            from    "@/components/DashboardComponents/OutfitLoading";
 import {
     UpArrow,
     DownArrow
@@ -229,7 +230,7 @@ export default function Dashboard() {
                             Generate Outfits
                         </button>
                         {loading ? (
-                            <OutfitSkeleton />
+                            <OutfitLoading />
                         ) : (
                             outfitChoices && <OutfitChoicesComponent outfitChoices={outfitChoices} />
                         )}

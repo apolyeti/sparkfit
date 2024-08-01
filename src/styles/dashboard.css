@@ -242,16 +242,16 @@
 
 @keyframes fadeInOut {
     0% {
-        opacity: 0;
+        opacity: 1;
     }
     20% {
-        opacity: 1;
+        opacity: 0;
     }
     80% {
-        opacity: 1;
+        opacity: 0;
     }
     100% {
-        opacity: 0;
+        opacity: 1;
     }
 }
 
