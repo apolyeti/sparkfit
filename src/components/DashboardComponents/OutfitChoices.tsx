@@ -40,7 +40,7 @@ export default function OutfitChoicesComponent({ outfitChoices }: OutfitChoicesC
                                 ))}
                             </div>
                             <div className="flex flex-col items-center justify-center border-t-2 p-1 h-full">
-                                <p className="text-lg text-center">
+                                <p className="text-lg text-center" id="outfit-reason">
                                     {choice.reason}
                                 </p>
                             </div>
