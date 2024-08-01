@@ -6,6 +6,10 @@ import type {
 } from "@utils/types";
 
 
+/**
+ * @param type - the type of storage to check for, either 'localStorage' or 'sessionStorage'
+ * @returns boolean indicating if the storage type is available
+ */
 
 export function storageAvailable(type: 'localStorage' | 'sessionStorage'): boolean {
     let storage: Storage | null = null;
@@ -26,6 +30,13 @@ export function storageAvailable(type: 'localStorage' | 'sessionStorage'): boole
         );
     }
 }
+
+/**
+ * @param API_KEY - the API key to use for the weather API
+ * @param lat - the latitude of the location
+ * @param lon - the longitude of the location
+ * @returns a UserLocationInfo object containing the weather data
+ */
 
 export async function getWeatherData(API_KEY: string, lat: number, lon: number): Promise<UserLocationInfo> {
     const apiUrl : string = process.env.NEXT_PUBLIC_API_URL || "";
@@ -56,6 +67,11 @@ export async function getWeatherData(API_KEY: string, lat: number, lon: number):
     return weatherData;
 }
 
+/**
+ * @param form - the form data containing the images to classify
+ * @returns an array of SparkFitImage objects
+ */
+
 export async function classifySparkFitImages(form: FormData): Promise<SparkFitImage[]> {
     const apiUrl : string = process.env.NEXT_PUBLIC_API_URL || "";
     console.log(form)
@@ -84,6 +100,12 @@ export async function classifySparkFitImages(form: FormData): Promise<SparkFitIm
     return result;
 }
 
+/**
+ * @param email - the email of the user to sign in
+ * @param name - the name of the user to sign in
+ * @returns Promise<void>
+ */
+
 export async function signInUser(email: string, name: string): Promise<void> {
     const first_name = name.split(" ")[0];
     const last_name = name.split(" ")[1];
@@ -104,6 +126,11 @@ export async function signInUser(email: string, name: string): Promise<void> {
     });
 }
 
+/**
+ * @param email - the email of the user to sign out
+ * @returns Promise<void>
+ */
+
 export async function addUserClothes(email: string, clothes: SparkFitImage[]): Promise<void> {
     const apiUrl : string = process.env.NEXT_PUBLIC_API_URL || "";
     const response : Response = await fetch(`${apiUrl}/clothes/add`, {
@@ -120,6 +147,11 @@ export async function addUserClothes(email: string, clothes: SparkFitImage[]): P
     const data = await response.json();
     console.log(data);
 }
+
+/**
+ * @param email - the email of the user to fetch clothes for
+ * @returns an array of SparkFitImage objects
+ */
 
 export async function fetchUserClothes(email: string): Promise<SparkFitImage[]> {
     const apiUrl : string = process.env.NEXT_PUBLIC_API_URL || "";
@@ -154,6 +186,13 @@ export async function fetchUserClothes(email: string): Promise<SparkFitImage[]> 
 
     return clothes;
 }
+
+/**
+ * @param email - the email of the user to generate outfits for
+ * @param images - the images to generate outfits from
+ * @param weatherData - the weather data to use for outfit generation
+ * @returns an OutfitChoices object containing the outfit choices
+ */
 
 export async function generateOutfits(email: string, images: SparkFitImage[], weatherData: UserLocationInfo): Promise<OutfitChoices> {
 
@@ -198,6 +237,12 @@ export async function generateOutfits(email: string, images: SparkFitImage[], we
     return data;
 }
 
+/**
+ * @param email - the email of the user to delete clothing for
+ * @param photo_id - the photo_id of the clothing to delete
+ * @returns Promise<void>
+ */
+
 export async function deleteClothing(email: string, photo_id: string): Promise<void> {
     const apiUrl : string = process.env.NEXT_PUBLIC_API_URL || "";
     const response : Response = await fetch(`${apiUrl}/clothes/delete`, {
@@ -214,6 +259,12 @@ export async function deleteClothing(email: string, photo_id: string): Promise<v
     const data = await response.json();
     console.log(data);
 }
+
+/**
+ * @param email - the email of the user to update clothing for
+ * @param updatedItem - the updated SparkFitImage object
+ * @returns Promise<void>
+ */
 
 export async function updateClothing(email: string, updatedItem: SparkFitImage): Promise<void> {
     const apiUrl : string = process.env.NEXT_PUBLIC_API_URL || "";
