@@ -27,6 +27,11 @@ import ClosetItem               from    "@/components/DashboardComponents/Closet
 import OutfitChoicesComponent   from    "@/components/DashboardComponents/OutfitChoices";
 import ProfileCard              from    "@/components/DashboardComponents/ProfileCard";
 import WeatherDisplay           from    "@/components/DashboardComponents/WeatherDisplay";
+import OutfitLoading            from    "@/components/DashboardComponents/OutfitLoading";
+import {
+    UpArrow,
+    DownArrow
+}                               from    "@/components/DashboardComponents/Arrows";
 import DefaultSkeleton          from    "@/components/DefaultSkeleton";
 import LargeSkeleton            from    "@/components/LargeSkeleton";
 import OutfitSkeleton           from    "@/components/OutfitSkeleton";
@@ -120,8 +125,8 @@ export default function Dashboard() {
         if (session?.user?.email) {
             try {
                 await addUserClothes(session.user.email, images);
-                setModalOpen(false);
                 setReload(!reload);
+                setModalOpen(false);
             } catch (error) {
                 console.error(error);
             }
@@ -134,14 +139,15 @@ export default function Dashboard() {
         }
         // reload page
         setReload(!reload);
+        setEditModal(false);
     }
 
     const updateImage = async () => {
         if (session && session.user && session.user.email && selectedImage) {
             await updateClothing(session.user.email, selectedImage);
         }
-        setEditModal(false);
         setReload(!reload);
+        setEditModal(false);
     }
 
     
@@ -210,8 +216,8 @@ export default function Dashboard() {
                                         ))
                                     )}
                                 </div>
-                                <div className="dropdown-btn" onClick={toggleCloset}>
-                
+                                <div className="dropdown-btn justify-center flex" onClick={toggleCloset}>
+                                    {closetExpanded ? <UpArrow /> : <DownArrow />}
                                 </div>
                             </div>
                         ) : (
@@ -219,12 +225,12 @@ export default function Dashboard() {
                         )}        
                     </div>
                     
-                    <div className="p-4 text-center flex-col">
+                    <div className="p-4 text-center flex-col text-lg">
                         <button onClick={handleGenerateOutfits} className="outfit-btn" id="outfit-btn">
-                            Generate Outfits
+                            GENERATE
                         </button>
                         {loading ? (
-                            <OutfitSkeleton />
+                            <OutfitLoading />
                         ) : (
                             outfitChoices && <OutfitChoicesComponent outfitChoices={outfitChoices} />
                         )}

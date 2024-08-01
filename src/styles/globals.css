@@ -38,3 +38,60 @@ html, body {
     width: 10px;
     height: 10px;
 }
+
+@keyframes moveDiagonally {
+    0% {
+        transform: translate(0, 0);
+    }
+    50% {
+        transform: translate(100px, -100px);
+    }
+    100% {
+        transform: translate(0, 0);
+    }
+}
+
+@keyframes moveDiagonallyReverse {
+    0% {
+        transform: translate(0, 0);
+    }
+    50% {
+        transform: translate(-100px, 100px);
+    }
+    100% {
+        transform: translate(0, 0);
+    }
+}
+
+@keyframes moveDiagonallyThird {
+    0% {
+        transform: translate(0, 0);
+    }
+    50% {
+        transform: translate(80px, 80px);
+    }
+    100% {
+        transform: translate(0, 0);
+    }
+}
+
+.animate-diagonal1 {
+    animation: moveDiagonally 30s infinite;
+    rotate: 15deg;
+    top: 20%; /* Adjust the starting position as needed */
+    left: 10%; /* Adjust the starting position as needed */
+}
+
+.animate-diagonal2 {
+    rotate: 330deg;
+    animation: moveDiagonallyReverse 30s infinite;
+    top: 40%; /* Adjust the starting position as needed */
+    right: 10%; /* Adjust the starting position as needed */
+}
+
+.animate-diagonal3 {
+    animation: moveDiagonallyThird 30s infinite;
+    rotate: 10deg;
+    bottom: 10%;
+    left: 30%;
+}
