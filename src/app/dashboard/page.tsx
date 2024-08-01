@@ -26,6 +26,7 @@ import EditItem                 from    "@/components/DashboardComponents/EditIt
 import ClosetItem               from    "@/components/DashboardComponents/ClosetItem";
 import OutfitChoicesComponent   from    "@/components/DashboardComponents/OutfitChoices";
 import ProfileCard              from    "@/components/DashboardComponents/ProfileCard";
+import WeatherDisplay           from    "@/components/DashboardComponents/WeatherDisplay";
 import DefaultSkeleton          from    "@/components/DefaultSkeleton";
 import LargeSkeleton            from    "@/components/LargeSkeleton";
 import OutfitSkeleton           from    "@/components/OutfitSkeleton";
@@ -175,14 +176,10 @@ export default function Dashboard() {
                         <ProfileCard />
                         <div>
                             {userLocationInfo ? (
-                                <div>
-                                    <p>
-                                        Temperature: {getTemperature()}
-                                    </p>
-                                    <p>
-                                        Condition: {userLocationInfo.weather}
-                                    </p>
-                                </div>
+                                <WeatherDisplay
+                                    temperature={getTemperature()}
+                                    weather={userLocationInfo.weather}
+                                />
                             ) : <DefaultSkeleton />}
                         </div>
                         <div>
