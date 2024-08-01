@@ -43,6 +43,9 @@ export default function FileInput({ setImages, setModalOpen, children }: FileInp
             <div {...getRootProps()} className="dropzone text-center text-2xl">
                 <input {...getInputProps()} />
                 {children}
+                <p className="dropzone-footer">
+                    accepted file types: .jpg, .jpeg, .png
+                    </p>
             </div>
             {/* <ClothesModal isOpen={modalOpen} onClose={closeModal}>
                 {images.map((image) => (
