@@ -1,5 +1,5 @@
 .grid {
-    background-color: #6A8D92;
+    background-color: #526e72;
     padding: 20px;
     display: grid;
     grid-template-columns: repeat(6, 1fr);
@@ -23,7 +23,7 @@
 }
 
 .dropzone:hover {
-    background-color: #9F838C;
+    background-color: #6a8d92;
     cursor: pointer;
     transform: scale(1.02);
     transition: transform 0.1s;
@@ -72,6 +72,13 @@
     cursor: pointer;
 }
 
+.modal-header {
+    /* make center */
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    font-size: x-large;
+}
 .images-container {
     display: flex;
     flex-wrap: wrap;
@@ -100,7 +107,7 @@
 }
 
 .clothing-select {
-    background-color: #9F838C;
+    background-color: #0c1f2b;
     color: #f7ece1;
     border: none;
     padding: 10px;
@@ -133,6 +140,16 @@
     gap: 20px;
 }
 
+.lg-skeleton {
+    width: 100%;
+}
+
+.sm-skeleton {
+    width: 60%;
+    /* center */
+    margin: 0 auto;
+}
+
 .profile-card-image {
     width: 100px;
     height: 100px;
@@ -142,7 +159,7 @@
 
 .dropdown-btn {
     /* opacity gradient goes to 100 to 0 from up to down */
-    background: linear-gradient(to bottom, rgba(106, 141, 146, 1) 0%, rgba(106, 141, 146, 0) 100%);
+    background: linear-gradient(to bottom, rgba(82, 110, 114, 1) 0%, rgba(82, 110, 114, 0) 100%);
     border: none;
     /* have border radius only on bottom */
     border-radius: 0 0 8px 8px;
@@ -178,7 +195,7 @@
 }
 
 .navbar {
-    background-color: #6a8d92;
+    background-color: #526e72;
     color: #f7ece1;
     border-radius: 8px;
     /* padding from top */

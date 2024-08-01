@@ -33,7 +33,7 @@ export default function EditItem({ image, handleDelete, handleEdit, setSelectedI
 
     return (
         <div className="flex flex-col items-center">
-            <h1 className="text-xl">
+            <h1 className="modal-header text-center">
                 Edit Item
             </h1>
             <Image 

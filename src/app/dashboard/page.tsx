@@ -27,7 +27,9 @@ import ClosetItem               from    "@/components/DashboardComponents/Closet
 import OutfitChoicesComponent   from    "@/components/DashboardComponents/OutfitChoices";
 import ProfileCard              from    "@/components/DashboardComponents/ProfileCard";
 import DefaultSkeleton          from    "@/components/DefaultSkeleton";
+import LargeSkeleton            from    "@/components/LargeSkeleton";
 import Loading                  from    "@/components/Loading";
+import OutfitSkeleton from "@/components/OutfitSkeleton";
 
 
 
@@ -218,7 +220,7 @@ export default function Dashboard() {
                                 </div>
                             </div>
                         ) : (
-                            <DefaultSkeleton />
+                            <LargeSkeleton />
                         )}        
                     </div>
                     
@@ -227,7 +229,7 @@ export default function Dashboard() {
                             Generate Outfits
                         </button>
                         {loading ? (
-                            <Loading />
+                            <OutfitSkeleton />
                         ) : (
                             outfitChoices && <OutfitChoicesComponent outfitChoices={outfitChoices} />
                         )}
