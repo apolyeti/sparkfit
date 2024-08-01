@@ -1,4 +1,11 @@
-import type { UserLocationInfo, SparkFitImage, OutfitChoices, DynamoClothing } from "@utils/types";
+import type { 
+    UserLocationInfo, 
+    SparkFitImage,
+    OutfitChoices, 
+    DynamoClothing 
+} from "@utils/types";
+
+
 
 export function storageAvailable(type: 'localStorage' | 'sessionStorage'): boolean {
     let storage: Storage | null = null;

@@ -1,5 +1,5 @@
-import "@styles/dashboard.css"
-import Link from "next/link";
+import              "@styles/dashboard.css"
+import Link from    "next/link";
 
 const Sidebar = () => {
     return (

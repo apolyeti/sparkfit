@@ -1,7 +1,11 @@
 "use client";
-import { useRouter } from "next/navigation"
-import { signIn, signOut, useSession } from "next-auth/react"
-import { providerMap } from "@lib/auth"
+import { useRouter }                    from "next/navigation"
+import { 
+    signIn, 
+    signOut, 
+    useSession 
+}                                       from "next-auth/react"
+import { providerMap }                  from "@lib/auth"
 
 export default function SignInPage() {
     const router = useRouter()

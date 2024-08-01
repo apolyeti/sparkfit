@@ -1,6 +1,6 @@
-import type { SparkFitImage } from "@/utils/types";
-import Image from "next/image";
-import {useState} from "react";
+import type { SparkFitImage }   from "@/utils/types";
+import { useState }             from "react";
+import Image                    from "next/image";
 
 interface ClothesEntryProps extends React.HTMLProps<HTMLDivElement> {
     image: SparkFitImage;
@@ -10,10 +10,10 @@ interface ClothesEntryProps extends React.HTMLProps<HTMLDivElement> {
 
 export default function ClothesEntry({ image, onUpdate }: ClothesEntryProps) {
 
-    const [color, setColor] = useState(image.color || "");
-    const [fabric, setFabric] = useState(image.fabric || "");
-    const [fit, setFit] = useState(image.fit || "");
-    const [category, setCategory] = useState(image.category || "");
+    const [color, setColor]                 = useState(image.color || "");
+    const [fabric, setFabric]               = useState(image.fabric || "");
+    const [fit, setFit]                     = useState(image.fit || "");
+    const [category, setCategory]           = useState(image.category || "");
     const [otherCategory, setOtherCategory] = useState("");
 
     const handleUpdate = () => {

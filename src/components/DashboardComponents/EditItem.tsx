@@ -1,8 +1,8 @@
 "use client";
 
-import Image from "next/image";
-import { useState } from "react";
-import { SparkFitImage } from "@/utils/types";
+import Image                from "next/image";
+import { useState }         from "react";
+import { SparkFitImage }    from "@/utils/types";
 
 interface EditItemProps extends React.HTMLProps<HTMLDivElement> {
     image: SparkFitImage;

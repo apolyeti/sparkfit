@@ -1,4 +1,3 @@
-
 import GetStartedButton from "@/components/HomePageComponents/GetStartedButton";
 
 export default async function Home() {
