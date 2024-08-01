@@ -1,5 +1,5 @@
-import "@styles/dashboard.css"
-import clsx from "clsx";
+import                  "@styles/dashboard.css"
+import clsx        from "clsx";
 
 interface DashboardItemProps extends React.HTMLAttributes<HTMLDivElement> {
     name: string;

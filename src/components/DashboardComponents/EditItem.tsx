@@ -1,8 +1,8 @@
 "use client";
 
-import Image from "next/image";
-import { useState } from "react";
-import { SparkFitImage } from "@/utils/types";
+import Image                from "next/image";
+import { useState }         from "react";
+import { SparkFitImage }    from "@/utils/types";
 
 interface EditItemProps extends React.HTMLProps<HTMLDivElement> {
     image: SparkFitImage;
@@ -33,7 +33,7 @@ export default function EditItem({ image, handleDelete, handleEdit, setSelectedI
 
     return (
         <div className="flex flex-col items-center">
-            <h1 className="text-xl">
+            <h1 className="modal-header text-center">
                 Edit Item
             </h1>
             <Image 

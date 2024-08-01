@@ -1,13 +1,10 @@
 "use client";
 
-import Link from "next/link";
-import { useState } from "react";
-import { useSession } from "next-auth/react";
+import Link             from "next/link";
+import { useSession }   from "next-auth/react";
 
 export default function GetStartedButton() {
-
-
-
+    
     const { data: session } = useSession();
 
     return (

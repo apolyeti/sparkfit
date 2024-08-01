@@ -27,7 +27,8 @@ import ClosetItem               from    "@/components/DashboardComponents/Closet
 import OutfitChoicesComponent   from    "@/components/DashboardComponents/OutfitChoices";
 import ProfileCard              from    "@/components/DashboardComponents/ProfileCard";
 import DefaultSkeleton          from    "@/components/DefaultSkeleton";
-import Loading                  from    "@/components/Loading";
+import LargeSkeleton            from    "@/components/LargeSkeleton";
+import OutfitSkeleton           from    "@/components/OutfitSkeleton";
 
 
 
@@ -38,16 +39,13 @@ export default function Dashboard() {
     const [userCloset, setUserCloset]               = useState<SparkFitImage[]>([]);
     const [selectedImage, setSelectedImage]         = useState<SparkFitImage | null>(null);
     const [outfitChoices, setOutfitChoices]         = useState<OutfitChoices | null>(null);
-    const [modalOpen, setModalOpen]                 = useState(false);
-    const [loading, setLoading]                     = useState(false);
-    const [closetExpanded, setClosetExpanded]       = useState(false);
-    const [EditModal, setEditModal]                 = useState(false);
-    const [reload, setReload]                       = useState(false);
-
-
+    const [closetExpanded, setClosetExpanded]       = useState<boolean>(false);
+    const [modalOpen, setModalOpen]                 = useState<boolean>(false);
+    const [EditModal, setEditModal]                 = useState<boolean>(false);
+    const [loading, setLoading]                     = useState<boolean>(false);
+    const [reload, setReload]                       = useState<boolean>(false);
 
     const maxPreviewItems = 6; 
-
 
     useEffect(() => {
         const API_KEY = process.env.NEXT_PUBLIC_WEATHER_API_KEY || "NO API KEY FOUND";
@@ -221,7 +219,7 @@ export default function Dashboard() {
                                 </div>
                             </div>
                         ) : (
-                            <DefaultSkeleton />
+                            <LargeSkeleton />
                         )}        
                     </div>
                     
@@ -230,7 +228,7 @@ export default function Dashboard() {
                             Generate Outfits
                         </button>
                         {loading ? (
-                            <Loading />
+                            <OutfitSkeleton />
                         ) : (
                             outfitChoices && <OutfitChoicesComponent outfitChoices={outfitChoices} />
                         )}

@@ -1,38 +1,14 @@
-.sidebar {
-    background-color: #281935; 
-    color: #f7ece1;
-}
-
-.dashboard-container {
-    width: 100%;
-}
-
-.dashboard-item {
-    background-color: #402855;
-}
-
-.dashboard-item:hover {
-    transform: scale(1.02);
-    transition: transform 0.2s;
-    background-color: #53356e;
-}
-
-.dashboard-item:active {
-    transform: scale(0.98);
-    transition: transform 0.2s;
-    background-color: #3b264e;
-}
-
 .grid {
-    background-color: #402855;
+    background-color: #526e72;
     padding: 20px;
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     gap: 16px;
+    border-radius: 8px 8px 0 0;
 }
 
 .dropzone {
-    background-color: #281935;
+    background-color:transparent;
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -40,10 +16,28 @@
     justify-content: center;
     height: 100%;
     padding: 20px;
+    color: #f7ece1;
+    transition: transform 0.2s;
+    border-radius: 8px;
+    border: 2px dashed #f7ece1;
 }
 
 .dropzone:hover {
-    background-color: #342145;
+    background-color: #6a8d92;
+    cursor: pointer;
+    transform: scale(1.02);
+    transition: transform 0.1s;
+}
+
+.dropzone:active {
+    background-color: #92767f;
+    transform: scale(0.98);
+    transition: transform 0.1s;
+}
+
+.dropzone-footer {
+    color: #f7ece1;
+    font-size: smaller
 }
 
 .modal-overlay {
@@ -60,7 +54,7 @@
 }
 
 .modal-content {
-    background: #3b264e;
+    background: #2f4350;
     padding: 20px;
     border-radius: 8px;
     max-width: 90%;
@@ -78,6 +72,13 @@
     cursor: pointer;
 }
 
+.modal-header {
+    /* make center */
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    font-size: x-large;
+}
 .images-container {
     display: flex;
     flex-wrap: wrap;
@@ -96,8 +97,8 @@
 }
 
 .clothing-input {
-    background-color: #281935;
-    color: #f7ece1;
+    background-color: #0c1f2b;
+    color: #f3e9d2;
     border: none;
     padding: 10px;
     border-radius: 8px;
@@ -106,54 +107,13 @@
 }
 
 .clothing-select {
-    background-color: #281935;
+    background-color: #0c1f2b;
     color: #f7ece1;
     border: none;
     padding: 10px;
     border-radius: 8px;
     width: 100%;
     margin-bottom: 10px;
-}
-
-.closet-container {
-    position: relative;
-    overflow: hidden;
-    transition: max-height 0.5s ease;
-    background: #402855; /* Match the container background */
-    padding: 1rem; /* Adjust padding as needed */
-}
-
-.closet-container.expanded {
-    max-height: none; /* Allow full expansion */
-}
-
-.closet-container.collapsed {
-    max-height: 150px; /* Adjust the max-height for preview */
-}
-
-.closet-container::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 50px; /* Adjust the height to control the gradient */
-    background: linear-gradient(to bottom, rgba(64, 40, 85, 0) 0%, rgba(64, 40, 85, 1) 100%);
-    transition: opacity 0.5s ease;
-}
-
-.closet-container.expanded::after {
-    opacity: 0;
-}
-
-.closet-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.closet-item span {
-    text-align: center;
 }
 
 .clothes-image {
@@ -163,8 +123,13 @@
     border-radius: 8px;
 }
 
+.clothes-image:hover {
+    cursor: pointer;
+    transform: scale(1.02);
+    transition: transform 0.1s;
+}
+
 .profile-card {
-    background-color: #402855;
     padding: 15px;
     border-radius: 8px;
 }
@@ -173,6 +138,16 @@
     display: flex;
     align-items: center;
     gap: 20px;
+}
+
+.lg-skeleton {
+    width: 100%;
+}
+
+.sm-skeleton {
+    width: 60%;
+    /* center */
+    margin: 0 auto;
 }
 
 .profile-card-image {
@@ -184,7 +159,7 @@
 
 .dropdown-btn {
     /* opacity gradient goes to 100 to 0 from up to down */
-    background: linear-gradient(to bottom, rgba(64, 40, 85, 1) 0%, rgba(64, 40, 85, 0) 100%);
+    background: linear-gradient(to bottom, rgba(82, 110, 114, 1) 0%, rgba(82, 110, 114, 0) 100%);
     border: none;
     /* have border radius only on bottom */
     border-radius: 0 0 8px 8px;
@@ -193,35 +168,42 @@
 }
 
 .dropdown-btn:hover {
-    background: linear-gradient(to bottom, rgba(64, 40, 85, 0.8) 0%, rgba(64, 40, 85, 0) 100%);
     cursor: pointer;
 }
 
 .outfit-btn {
-    background-color: #281935;
+    background-color: #6a8d92;
     color: #f7ece1;
     border: none;
     padding: 10px;
     border-radius: 8px;
     width: 50%;
     margin-bottom: 10px;
+    transition: transform 0.2s;
 }
 
 .outfit-btn:hover {
-    background-color: #342145;
+    background-color: #9F838C;
     cursor: pointer;
+    transform: scale(1.02);
+    transition: transform 0.1s;
+}
+
+.outfit-btn:active {
+    background-color: #8b7179;
+    transform: scale(0.98);
 }
 
 .navbar {
-    background-color: #281935;
+    background-color: #526e72;
     color: #f7ece1;
     border-radius: 8px;
     /* padding from top */
 }
 
 .save-btn {
-    background-color: #2d1e3a;
-    color: #f7ece1;
+    background-color: #F3E9D2;
+    color: #031927;
     border: none;
     padding: 10px;
     border-radius: 8px;
@@ -230,7 +212,7 @@
 }
 
 .save-btn:hover {
-    background-color: #4f3368;
+    background-color: #f7ece1;
     cursor: pointer;
 }
 

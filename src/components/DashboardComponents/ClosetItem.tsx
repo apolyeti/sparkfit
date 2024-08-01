@@ -1,5 +1,5 @@
-import type { SparkFitImage } from "@/utils/types";
-import Image from "next/image";
+import type { SparkFitImage }   from "@/utils/types";
+import Image                    from "next/image";
 
 interface ClothesItemProps extends React.HTMLProps<HTMLDivElement> {
     image: SparkFitImage;

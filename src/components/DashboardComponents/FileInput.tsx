@@ -1,10 +1,8 @@
 "use client";
-import { useDropzone } from "react-dropzone";
-import { useCallback, useState } from "react";
-import "@styles/dashboard.css";
-import { classifySparkFitImages } from "@/utils/helpers";
-import ClothesModal from "@/components/DashboardComponents/ClothesModal";
-import Image from "next/image";
+import                                   "@styles/dashboard.css";
+import { useDropzone }              from "react-dropzone";
+import { useCallback }              from "react";
+import { classifySparkFitImages }   from "@/utils/helpers";
 
 import type { SparkFitImage } from "@utils/types";
 
@@ -43,6 +41,9 @@ export default function FileInput({ setImages, setModalOpen, children }: FileInp
             <div {...getRootProps()} className="dropzone text-center text-2xl">
                 <input {...getInputProps()} />
                 {children}
+                <p className="dropzone-footer">
+                    accepted file types: .jpg, .jpeg, .png
+                    </p>
             </div>
             {/* <ClothesModal isOpen={modalOpen} onClose={closeModal}>
                 {images.map((image) => (

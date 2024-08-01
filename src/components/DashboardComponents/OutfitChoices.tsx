@@ -1,6 +1,9 @@
-import Image from "next/image";
+import Image    from "next/image";
 
-import type { OutfitChoices, OutfitChoice } from "@/utils/types";
+import type { 
+    OutfitChoices, 
+    OutfitChoice 
+}               from "@/utils/types";
 
 interface OutfitChoicesComponentProps {
     outfitChoices: OutfitChoices;
