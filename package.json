@@ -26,7 +26,8 @@
     "react-bootstrap": "^2.10.4",
     "react-dom": "^18",
     "react-dropzone": "^14.2.3",
-    "react-github-login-button": "^1.0.1"
+    "react-github-login-button": "^1.0.1",
+    "react-google-button": "^0.8.0"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^1.6.0",
