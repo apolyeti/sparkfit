@@ -17,7 +17,7 @@ export default function ClothesItem({ image, handleEdit }: ClothesItemProps) {
                 priority
             />
             <p>
-                {image.category}
+                {image.category.toUpperCase()}
             </p>
         </div>
     );
