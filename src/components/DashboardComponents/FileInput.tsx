@@ -21,6 +21,10 @@ export default function FileInput({ setImages, setModalOpen, children }: FileInp
 
         acceptedFiles.forEach((file) => {
             const reader = new FileReader();
+            // Check if the file is an image
+            if (!file.type.match('image.*')) {
+                return;
+            }
             formData.append("files", file);
         });
         
@@ -45,18 +49,6 @@ export default function FileInput({ setImages, setModalOpen, children }: FileInp
                     accepted file types: .jpg, .jpeg, .png
                     </p>
             </div>
-            {/* <ClothesModal isOpen={modalOpen} onClose={closeModal}>
-                {images.map((image) => (
-                    <div key={image.file_name}>
-                        <Image src={image.data} alt={image.file_name} width={100} height={100}/>
-                        <div>
-                            {image.names.map((name) => (
-                                <span key={name}>{name}</span>
-                            ))}
-                        </div>
-                    </div>
-                ))}
-            </ClothesModal> */}
         </>
     );
 }
