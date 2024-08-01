@@ -239,3 +239,38 @@
     background-color: #5c1a1a;
     cursor: pointer;
 }
+
+@keyframes fadeInOut {
+    0% {
+        opacity: 0;
+    }
+    20% {
+        opacity: 1;
+    }
+    80% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+.animate-fade-1 {
+    animation: fadeInOut 2s infinite;
+}
+
+.animate-fade-2 {
+    animation: fadeInOut 2s infinite;
+    animation-delay: 0.5s;
+}
+
+.animate-fade-3 {
+    animation: fadeInOut 2s infinite;
+    animation-delay: 1s;
+}
+
+.loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

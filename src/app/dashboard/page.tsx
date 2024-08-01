@@ -124,8 +124,8 @@ export default function Dashboard() {
         if (session?.user?.email) {
             try {
                 await addUserClothes(session.user.email, images);
-                setModalOpen(false);
                 setReload(!reload);
+                setModalOpen(false);
             } catch (error) {
                 console.error(error);
             }
@@ -138,14 +138,15 @@ export default function Dashboard() {
         }
         // reload page
         setReload(!reload);
+        setEditModal(false);
     }
 
     const updateImage = async () => {
         if (session && session.user && session.user.email && selectedImage) {
             await updateClothing(session.user.email, selectedImage);
         }
-        setEditModal(false);
         setReload(!reload);
+        setEditModal(false);
     }
 
     
