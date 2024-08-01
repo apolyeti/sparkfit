@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { signOut } from "next-auth/react";
-import router from "next/navigation"
+import router from "next/router"
 
 
 
@@ -12,7 +12,7 @@ export default function NavBar() {
             // send user back to the home page
         } catch (error) {
             console.error("Error during sign out:", error);
-            router.redirect("/error");
+            router.push("/error");
         }
     }
     return (
