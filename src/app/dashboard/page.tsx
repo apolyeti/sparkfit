@@ -95,6 +95,10 @@ export default function Dashboard() {
                 const outfitChoices = await generateOutfits(session.user.email, userCloset, userLocationInfo);
                 setOutfitChoices(outfitChoices);
                 setLoading(false);
+                // wait for a bit before scrolling to outfit
+                setTimeout(() => {
+                    document.getElementById("outfit-reason")?.scrollIntoView({ behavior: "smooth" });
+                }, 100);
             } catch (error) {
                 console.error(error);
             }
