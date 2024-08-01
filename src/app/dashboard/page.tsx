@@ -90,7 +90,6 @@ export default function Dashboard() {
                 const outfitChoices = await generateOutfits(session.user.email, userCloset, userLocationInfo);
                 setOutfitChoices(outfitChoices);
                 setLoading(false);
-                console.log(outfitChoices);
             } catch (error) {
                 console.error(error);
             }
@@ -221,7 +220,7 @@ export default function Dashboard() {
                     </div>
                     
                     <div className="p-4 text-center flex-col">
-                        <button onClick={handleGenerateOutfits} className="outfit-btn">
+                        <button onClick={handleGenerateOutfits} className="outfit-btn" id="outfit-btn">
                             Generate Outfits
                         </button>
                         {loading ? (

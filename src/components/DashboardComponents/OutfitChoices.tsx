@@ -1,9 +1,5 @@
-import Image    from "next/image";
-
-import type { 
-    OutfitChoices, 
-    OutfitChoice 
-}               from "@/utils/types";
+import Image from "next/image";
+import type { OutfitChoices, OutfitChoice } from "@/utils/types";
 
 interface OutfitChoicesComponentProps {
     outfitChoices: OutfitChoices;
@@ -13,9 +9,9 @@ export default function OutfitChoicesComponent({ outfitChoices }: OutfitChoicesC
     return (
         <div className="flex flex-col items-center justify-center">
             <h1 className="text-3xl font-bold"></h1>
-            <div className="flex flex-col items-center justify-center w-full">
+            <div className="flex flex-row gap-2 items-stretch justify-center w-full">
                 {outfitChoices.choices.map((choice: OutfitChoice, index: number) => (
-                    <div key={index} className="rounded border-2 border-white flex flex-row max-h-2/3 w-2/5 justify-center mb-4 p-4">
+                    <div key={index} className="rounded border-2 border-white flex flex-row w-2/5 justify-center mb-4 p-4">
                         <div className="flex flex-col items-center justify-center">
                             {choice.outfit.map((clothing) => (
                                 <div key={clothing.photo_id} className="flex flex-col items-center justify-center p-2">
@@ -40,5 +36,3 @@ export default function OutfitChoicesComponent({ outfitChoices }: OutfitChoicesC
         </div>
     );
 }
-
-
