@@ -1,8 +1,3 @@
-
-/**
- * This file contains all the types used in the project
- */
-
 export type SparkFitImage  = {
     photo_id: string,
     predicted_classes: string[],
