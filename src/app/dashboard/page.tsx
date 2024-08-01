@@ -28,8 +28,7 @@ import OutfitChoicesComponent   from    "@/components/DashboardComponents/Outfit
 import ProfileCard              from    "@/components/DashboardComponents/ProfileCard";
 import DefaultSkeleton          from    "@/components/DefaultSkeleton";
 import LargeSkeleton            from    "@/components/LargeSkeleton";
-import Loading                  from    "@/components/Loading";
-import OutfitSkeleton from "@/components/OutfitSkeleton";
+import OutfitSkeleton           from    "@/components/OutfitSkeleton";
 
 
 
@@ -45,7 +44,7 @@ export default function Dashboard() {
     const [EditModal, setEditModal]                 = useState<boolean>(false);
     const [loading, setLoading]                     = useState<boolean>(false);
     const [reload, setReload]                       = useState<boolean>(false);
-    
+
     const maxPreviewItems = 6; 
 
     useEffect(() => {
