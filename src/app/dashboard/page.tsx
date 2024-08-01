@@ -26,6 +26,7 @@ import EditItem                 from    "@/components/DashboardComponents/EditIt
 import ClosetItem               from    "@/components/DashboardComponents/ClosetItem";
 import OutfitChoicesComponent   from    "@/components/DashboardComponents/OutfitChoices";
 import ProfileCard              from    "@/components/DashboardComponents/ProfileCard";
+import WeatherDisplay           from    "@/components/DashboardComponents/WeatherDisplay";
 import DefaultSkeleton          from    "@/components/DefaultSkeleton";
 import LargeSkeleton            from    "@/components/LargeSkeleton";
 import OutfitSkeleton           from    "@/components/OutfitSkeleton";
@@ -89,7 +90,6 @@ export default function Dashboard() {
                 const outfitChoices = await generateOutfits(session.user.email, userCloset, userLocationInfo);
                 setOutfitChoices(outfitChoices);
                 setLoading(false);
-                console.log(outfitChoices);
             } catch (error) {
                 console.error(error);
             }
@@ -171,18 +171,14 @@ export default function Dashboard() {
                 </ClothesModal>
 
                 <div className="flex flex-col justify-between">
-                    <div className="flex flex-row items-center justify-between p-4">
+                    <div className="flex flex-row items-center justify-evenly p-4">
                         <ProfileCard />
                         <div>
                             {userLocationInfo ? (
-                                <div>
-                                    <p>
-                                        Temperature: {getTemperature()}
-                                    </p>
-                                    <p>
-                                        Condition: {userLocationInfo.weather}
-                                    </p>
-                                </div>
+                                <WeatherDisplay
+                                    temperature={getTemperature()}
+                                    weather={userLocationInfo.weather}
+                                />
                             ) : <DefaultSkeleton />}
                         </div>
                         <div>
@@ -224,7 +220,7 @@ export default function Dashboard() {
                     </div>
                     
                     <div className="p-4 text-center flex-col">
-                        <button onClick={handleGenerateOutfits} className="outfit-btn">
+                        <button onClick={handleGenerateOutfits} className="outfit-btn" id="outfit-btn">
                             Generate Outfits
                         </button>
                         {loading ? (

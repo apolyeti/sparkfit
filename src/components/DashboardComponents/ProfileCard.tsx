@@ -20,7 +20,11 @@ export default function ProfileCard() {
                             height={100}
                         />
                     </div>
-                    <h1>{session.user.name}</h1>
+                    <h1
+                        className="text-2xl"
+                    >
+                        {session.user.name}
+                    </h1>
                 </div>
             ) : (
                 <DefaultSkeleton />

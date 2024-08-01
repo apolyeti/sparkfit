@@ -116,9 +116,16 @@
     margin-bottom: 10px;
 }
 
+.clothes-item {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
 .clothes-image {
-    width: 150px;
-    height: 150px;
+    width: 200px;
+    height: 200px;
     object-fit: cover; 
     border-radius: 8px;
 }
@@ -151,8 +158,8 @@
 }
 
 .profile-card-image {
-    width: 100px;
-    height: 100px;
+    width: auto;
+    height: auto;
     border-radius: 50%;
     overflow: hidden;
 }
@@ -195,7 +202,7 @@
 }
 
 .navbar {
-    background-color: #526e72;
+    /* background-color: #526e72; */
     color: #f7ece1;
     border-radius: 8px;
     /* padding from top */
