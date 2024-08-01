@@ -20,7 +20,6 @@ export default function WeatherDisplay({ temperature, weather }: WeatherDisplayP
     // check if it is day or night
     const date = new Date();
     const hours = date.getHours();
-    console.log(hours);
     if (hours >= 18 || hours < 6) {
         isDay = false;
     }
@@ -43,7 +42,7 @@ export default function WeatherDisplay({ temperature, weather }: WeatherDisplayP
 
 
     return (
-        <div className="flex flex-row items-center">
+        <div className="flex flex-col items-center p-0">
             <Image
                 src={weatherIcon}
                 alt="weather icon"

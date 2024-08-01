@@ -172,7 +172,7 @@ export default function Dashboard() {
                 </ClothesModal>
 
                 <div className="flex flex-col justify-between">
-                    <div className="flex flex-row items-center justify-between p-4">
+                    <div className="flex flex-row items-center justify-evenly p-4">
                         <ProfileCard />
                         <div>
                             {userLocationInfo ? (

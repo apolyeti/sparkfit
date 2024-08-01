@@ -39,7 +39,7 @@ export default function EditItem({ image, handleDelete, handleEdit, setSelectedI
             <Image 
                 src={image.data_url}
                 alt={image.file_name}
-                width={100} height={100}
+                width={300} height={200}
                 style={{width: "auto", height: "auto"}}
                 className="p-4"
             />
