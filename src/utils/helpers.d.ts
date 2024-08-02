@@ -75,4 +75,19 @@ declare module "@utils/helpers" {
      * @returns A Promise that resolves when the clothing item has been updated.
      */
     export function updateClothing(email: string, updatedItem: SparkFitImage): Promise<void>;
+
+    /**
+     * Fetches user's previously generated outfits.
+     * @param email - The email of the user.
+     * @returns A Promise that resolves to an OutfitChoices object containing the outfit choices.
+     * 
+     * @remarks
+     * This function fetches the user's previously generated outfits from the database.
+     * If no outfits are found, it generates new outfits based on the user's wardrobe and the weather.
+     * The generated outfits are then saved to the database for future use.
+     * 
+     * This function is intended to be used when the user logs in or refreshes the page.
+     * It ensures that the user always has outfit choices available.
+     */
+    export function fetchOutfits(email: string): Promise<OutfitChoices>;
 }
