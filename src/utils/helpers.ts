@@ -286,3 +286,50 @@ export async function updateClothing(email: string, updatedItem: SparkFitImage):
     const data = await response.json();
     console.log(data);
 }
+
+export async function fetchOutfits(email: string): Promise<OutfitChoices> {
+    const apiUrl : string = process.env.NEXT_PUBLIC_API_URL || "";
+    const response : Response = await fetch(`${apiUrl}/clothes/outfit/fetch`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            email,
+        }),
+    });
+
+    const data = await response.json();
+
+    interface PreviousOutfits extends OutfitChoices {
+        month: string;
+        day: string;
+        year: string;
+    }
+
+    // each element in the outfits array has a reason, date, and outfit
+    const outfits: PreviousOutfits = {
+        choices: data.outfits.map((outfit: any) => {
+            return {
+                reason: outfit.reason,
+                outfit: outfit.outfit.map((cloth: any) => {
+                    return {
+                        category: cloth.category,
+                        color: cloth.color,
+                        fabric: cloth.fabric,
+                        fit: cloth.fit,
+                        photo_id: cloth.photo_id,
+                        data_url: cloth.data_url,
+                        file_name: cloth.file_name,
+                    };
+                }),
+            };
+            
+        }),
+            month: data.split('-')[0],
+            day: data.split('-')[1],
+            year: data.split('-')[2],
+    };
+
+    return outfits;
+}

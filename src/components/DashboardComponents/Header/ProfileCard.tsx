@@ -12,7 +12,7 @@ export default function ProfileCard() {
             {session?.user ? (
                 <div className="profile-card-content">
                     {/* make profile picture a circle */}
-                    <div className="profile-card-image">
+                    <div className="profile-card-image">        
                         <Image
                             src={session.user.image || "/profile-placeholder.png"}
                             alt="Profile Picture"
