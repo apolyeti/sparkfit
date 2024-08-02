@@ -1,6 +1,8 @@
 "use client";
 import { 
-    useState, useEffect 
+    useState, 
+    useEffect,
+    useRef 
 } from                      "react";
 import { 
     useSession 
@@ -25,8 +27,8 @@ import ClothesEntry             from    "@/components/DashboardComponents/Modals
 import EditItem                 from    "@/components/DashboardComponents/Modals/EditItem";
 import ClosetItem               from    "@/components/DashboardComponents/ClosetItem";
 import OutfitChoicesComponent   from    "@/components/DashboardComponents/OutfitChoices";
-import ProfileCard              from    "@/components/DashboardComponents/ProfileCard";
-import WeatherDisplay           from    "@/components/DashboardComponents/WeatherDisplay";
+import ProfileCard              from    "@/components/DashboardComponents/Header/ProfileCard";
+import WeatherDisplay           from    "@/components/DashboardComponents/Header/WeatherDisplay";
 import {
     UpArrow,
     DownArrow
@@ -49,6 +51,7 @@ export default function Dashboard() {
     const [EditModal, setEditModal]                 = useState<boolean>(false);
     const [loading, setLoading]                     = useState<boolean>(false);
     const [reload, setReload]                       = useState<boolean>(false);
+    const closetRef                                 = useRef<HTMLDivElement>(null);
 
     const maxPreviewItems = 6; 
 
@@ -74,6 +77,16 @@ export default function Dashboard() {
         fetchUserClothesData();
     }, [session?.user?.email, reload]);
 
+    useEffect(() => {
+        if (closetRef.current) {
+            if (closetExpanded) {
+                closetRef.current.style.maxHeight = `${closetRef.current.scrollHeight}px`;
+            } else {
+                closetRef.current.style.maxHeight = "36vh";
+            }
+        }
+    }, [closetExpanded, userCloset]);
+
     const handleEdit = (image: SparkFitImage) => {
         setSelectedImage(image);
         setEditModal(true);
@@ -94,7 +107,6 @@ export default function Dashboard() {
                 const outfitChoices = await generateOutfits(session.user.email, userCloset, userLocationInfo);
                 setOutfitChoices(outfitChoices);
                 setLoading(false);
-                // wait for a bit before scrolling to outfit
                 setTimeout(() => {
                     document.getElementById("outfit-container")?.scrollIntoView({ behavior: "smooth" });
                 }, 100);
@@ -207,8 +219,8 @@ export default function Dashboard() {
 
                     <div className="p-4">
                         {userCloset.length > 0 ? (
-                            <div className="border-2 p-0.5 box-shadow">
-                                <div className="grid grid-cols-6 animate-fadeIn">
+                            <div ref={closetRef} className={`closet-container ${closetExpanded ? "expanded" : "collapsed"} border-2 p-0.5 box-shadow`}>
+                                <div className={'grid grid-cols-6 animate-fadeIn'}>
                                     {closetExpanded ? (
                                         userCloset.map((item, index) => (
                                             <ClosetItem key={index} image={item} handleEdit={() => handleEdit(item)}/>

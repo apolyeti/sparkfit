@@ -127,8 +127,8 @@
 }
 
 .clothes-image {
-    width: 200px;
-    height: 200px;
+    width: 150px;
+    height: 150px;
     object-fit: cover; 
     border-radius: 8px;
     overflow: hidden;
@@ -304,4 +304,17 @@
 
 .box-shadow {
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.267);
+}
+
+.closet-container {
+    overflow: hidden;
+    transition: max-height 1s ease;
+}
+
+.closet-container.collapsed {
+    max-height: 36vh;
+}
+
+.closet-container.expanded {
+    max-height: 1000px; /* A large enough value to fit all items */
 }
