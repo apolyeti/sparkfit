@@ -92,7 +92,7 @@ html, body {
 }
 
 .animate-diagonal1 {
-    animation: moveDiagonally 30s infinite;
+    animation: moveDiagonally 25s infinite;
     rotate: 15deg;
     top: 20%; /* Adjust the starting position as needed */
     left: 10%; /* Adjust the starting position as needed */
@@ -100,7 +100,7 @@ html, body {
 
 .animate-diagonal2 {
     rotate: 330deg;
-    animation: moveDiagonallyReverse 30s infinite;
+    animation: moveDiagonallyReverse 28s infinite;
     top: 40%; /* Adjust the starting position as needed */
     right: 10%; /* Adjust the starting position as needed */
 }

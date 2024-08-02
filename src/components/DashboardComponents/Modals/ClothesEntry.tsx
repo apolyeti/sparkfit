@@ -57,7 +57,7 @@ export default function ClothesEntry({ image, onUpdate }: ClothesEntryProps) {
                 <select
                     value={category}
                     onChange={handleNameChange}
-                    className="clothing-select"
+                    className="clothing-select mt-2"
                 >
                     {image.predicted_classes.map((name) => (
                         <option key={name} value={name}>{name}</option>

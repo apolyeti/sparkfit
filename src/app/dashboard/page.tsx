@@ -1,6 +1,8 @@
 "use client";
 import { 
-    useState, useEffect 
+    useState, 
+    useEffect,
+    useRef 
 } from                      "react";
 import { 
     useSession 
@@ -20,21 +22,20 @@ import type {
 } from                      "@/utils/types";
 
 import FileInput                from    "@/components/DashboardComponents/FileInput";
-import ClothesModal             from    "@/components/DashboardComponents/ClothesModal";
-import ClothesEntry             from    "@/components/DashboardComponents/ClothesEntry";
-import EditItem                 from    "@/components/DashboardComponents/EditItem";
+import ClothesModal             from    "@/components/DashboardComponents/Modals/ClothesModal";
+import ClothesEntry             from    "@/components/DashboardComponents/Modals/ClothesEntry";
+import EditItem                 from    "@/components/DashboardComponents/Modals/EditItem";
 import ClosetItem               from    "@/components/DashboardComponents/ClosetItem";
 import OutfitChoicesComponent   from    "@/components/DashboardComponents/OutfitChoices";
-import ProfileCard              from    "@/components/DashboardComponents/ProfileCard";
-import WeatherDisplay           from    "@/components/DashboardComponents/WeatherDisplay";
-import OutfitLoading            from    "@/components/DashboardComponents/OutfitLoading";
+import ProfileCard              from    "@/components/DashboardComponents/Header/ProfileCard";
+import WeatherDisplay           from    "@/components/DashboardComponents/Header/WeatherDisplay";
 import {
     UpArrow,
     DownArrow
 }                               from    "@/components/DashboardComponents/Arrows";
-import DefaultSkeleton          from    "@/components/DefaultSkeleton";
-import LargeSkeleton            from    "@/components/LargeSkeleton";
-import OutfitSkeleton           from    "@/components/OutfitSkeleton";
+import DefaultSkeleton          from    "@/components/LoadingComponents/DefaultSkeleton";
+import LargeSkeleton            from    "@/components/LoadingComponents/LargeSkeleton";
+import OutfitLoading            from    "@/components/LoadingComponents/OutfitLoading";
 
 
 
@@ -50,6 +51,7 @@ export default function Dashboard() {
     const [EditModal, setEditModal]                 = useState<boolean>(false);
     const [loading, setLoading]                     = useState<boolean>(false);
     const [reload, setReload]                       = useState<boolean>(false);
+    const closetRef                                 = useRef<HTMLDivElement>(null);
 
     const maxPreviewItems = 6; 
 
@@ -75,6 +77,16 @@ export default function Dashboard() {
         fetchUserClothesData();
     }, [session?.user?.email, reload]);
 
+    useEffect(() => {
+        if (closetRef.current) {
+            if (closetExpanded) {
+                closetRef.current.style.maxHeight = `${closetRef.current.scrollHeight}px`;
+            } else {
+                closetRef.current.style.maxHeight = "36vh";
+            }
+        }
+    }, [closetExpanded, userCloset]);
+
     const handleEdit = (image: SparkFitImage) => {
         setSelectedImage(image);
         setEditModal(true);
@@ -92,10 +104,12 @@ export default function Dashboard() {
         if (session?.user?.email && userLocationInfo) {
             try {
                 setLoading(true);
+                setTimeout(() => {
+                    document.getElementById("outfit-loading")?.scrollIntoView({ behavior: "smooth" });
+                }, 50);
                 const outfitChoices = await generateOutfits(session.user.email, userCloset, userLocationInfo);
                 setOutfitChoices(outfitChoices);
                 setLoading(false);
-                // wait for a bit before scrolling to outfit
                 setTimeout(() => {
                     document.getElementById("outfit-container")?.scrollIntoView({ behavior: "smooth" });
                 }, 100);
@@ -165,9 +179,11 @@ export default function Dashboard() {
                             onUpdate={handleUpdateImages}
                         />
                     ))}
-                    <button className="font-bold" onClick={handleSubmit}>
-                        Submit
-                    </button>
+                    <div className="w-full flex justify-center">
+                        <button className="submit-btn" onClick={handleSubmit}>
+                            Submit
+                        </button>
+                    </div>
                 </ClothesModal>
                 <ClothesModal isOpen={EditModal} onClose={closeEditModal}>
                     {selectedImage && (
@@ -208,8 +224,8 @@ export default function Dashboard() {
 
                     <div className="p-4">
                         {userCloset.length > 0 ? (
-                            <div className="border-2 p-1 box-shadow">
-                                <div className="grid grid-cols-6 gap-2 animate-fadeIn">
+                            <div ref={closetRef} className={`closet-container ${closetExpanded ? "expanded" : "collapsed"} border-2 p-2 box-shadow`}>
+                                <div className={'grid grid-cols-6 animate-fadeIn'}>
                                     {closetExpanded ? (
                                         userCloset.map((item, index) => (
                                             <ClosetItem key={index} image={item} handleEdit={() => handleEdit(item)}/>
@@ -230,9 +246,11 @@ export default function Dashboard() {
                     </div>
                     
                     <div className="p-4 text-center flex-col text-lg">
-                        <button onClick={handleGenerateOutfits} className="outfit-btn" id="outfit-btn">
-                            GENERATE
-                        </button>
+                        {userCloset.length > 1 && 
+                            <button onClick={handleGenerateOutfits} className="outfit-btn" id="outfit-btn">
+                                GENERATE
+                            </button>
+                        }
                         {loading ? (
                             <OutfitLoading />
                         ) : (
