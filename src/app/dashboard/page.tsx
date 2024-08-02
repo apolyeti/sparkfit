@@ -34,7 +34,6 @@ import {
 }                               from    "@/components/DashboardComponents/Arrows";
 import DefaultSkeleton          from    "@/components/DefaultSkeleton";
 import LargeSkeleton            from    "@/components/LargeSkeleton";
-import OutfitSkeleton           from    "@/components/OutfitSkeleton";
 
 
 

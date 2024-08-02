@@ -38,3 +38,6 @@ export type OutfitChoice = {
 export type OutfitChoices = {
     choices: OutfitChoice[]
 }
+
+
+
