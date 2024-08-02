@@ -38,7 +38,7 @@ The deployed version (on Vercel) does not currently work as there is no hosted b
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/yourusername/sparkfit-frontend.git
+   git clone https://github.com/apolyeti/sparkfit sparkfit-frontend
    cd sparkfit-frontend
    ```
 
