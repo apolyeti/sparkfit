@@ -75,6 +75,22 @@ html, body {
     }
 }
 
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.animate-fadeInSlow {
+    /* delay for a second */
+    animation: fadeIn 1s forwards;
+    animation-delay: 0.8s;
+    opacity: 0;
+}
+
 .animate-diagonal1 {
     animation: moveDiagonally 30s infinite;
     rotate: 15deg;
@@ -94,4 +110,19 @@ html, body {
     rotate: 10deg;
     bottom: 10%;
     left: 30%;
+}
+
+.get-started {
+    padding: 8px;
+    border-radius: 6px;
+    background-color: #052a41;
+    width: 100%;
+    margin-bottom: 10px;
+    transition: background-color 0.3s;
+}
+
+.get-started:hover {
+    background-color: #053a51;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }

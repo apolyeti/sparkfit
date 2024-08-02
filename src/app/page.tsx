@@ -31,9 +31,11 @@ export default function Home() {
                 />
             </div>
             <div className="h-screen flex flex-col items-center justify-center z-10 relative">
-                <h1 className="text-5xl text-white">Sparkfit</h1>
-                <p className="text-xl text-white">Get outfit suggestions based on the weather</p>
-                <GetStartedButton />
+                <h1 className="text-5xl animate-fadeInDown">Sparkfit</h1>
+                <p className="text-xl animate-fadeInDown">Get outfit suggestions based on the weather</p>
+                <div className="animate-fadeInSlow mt-1">
+                    <GetStartedButton />
+                </div>
             </div>
         </div>
     );
