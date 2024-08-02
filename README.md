@@ -18,6 +18,7 @@ https://github.com/user-attachments/assets/4684b00a-f9d5-4059-b163-9dbef57832cb
 <img src="https://authjs.dev/img/etc/logo-sm.webp" height="50"/>
 <img src="https://cdn-lfs.huggingface.co/repos/96/a2/96a2c8468c1546e660ac2609e49404b8588fcf5a748761fa72c154b2836b4c83/942cad1ccda905ac5a659dfd2d78b344fccfb84a8a3ac3721e08f488205638a0?response-content-disposition=inline%3B+filename*%3DUTF-8%27%27hf-logo.svg%3B+filename%3D%22hf-logo.svg%22%3B&response-content-type=image%2Fsvg%2Bxml&Expires=1722832503&Policy=eyJTdGF0ZW1lbnQiOlt7IkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTcyMjgzMjUwM319LCJSZXNvdXJjZSI6Imh0dHBzOi8vY2RuLWxmcy5odWdnaW5nZmFjZS5jby9yZXBvcy85Ni9hMi85NmEyYzg0NjhjMTU0NmU2NjBhYzI2MDllNDk0MDRiODU4OGZjZjVhNzQ4NzYxZmE3MmMxNTRiMjgzNmI0YzgzLzk0MmNhZDFjY2RhOTA1YWM1YTY1OWRmZDJkNzhiMzQ0ZmNjZmI4NGE4YTNhYzM3MjFlMDhmNDg4MjA1NjM4YTA%7EcmVzcG9uc2UtY29udGVudC1kaXNwb3NpdGlvbj0qJnJlc3BvbnNlLWNvbnRlbnQtdHlwZT0qIn1dfQ__&Signature=bPtRh3qBMBM552KgCm70IJpLOFcnY6pFz-QLGy7GQTgvd0uHE4gU9KuCnOjaZKPaaiu6C-STzkyiXvYeQAoJ165e2xj4doRHrDa8P18D%7EpIoDejK-JD8VvgN98wcqItgFUaoS8gDQDPzGaJZZUhcCNHhirnP3vnJTjJSAsbD5qWQeXYv4k10M7YLsnxeDjFBwuo5HNsMZVl-vZ2Hqd6cOcQuK0z9Jw2018teV5RyqdCh-uZTiZhsy6xVbfPH4ytJ6ubKQuAXLLfvRrDLyYaWoikc5M1YtJwTi4f8GxL7Z7Un3Ut9iuvpPopLlTvzCU2BWoZkNAU%7E6VBj9-ghYv2DUQ__&Key-Pair-Id=K3ESJI6DHPFC7" height="50">
 <img src="https://avatars.githubusercontent.com/u/132372032?s=200&v=4" height="50"/>
+<img height="50" src="https://user-images.githubusercontent.com/25181517/117207330-263ba280-adf4-11eb-9b97-0ac5b40bc3be.png">
 
 
 ## 🚧 Not yet deployed
@@ -54,6 +55,8 @@ The deployed version (on Vercel) does not currently work as there is no hosted b
    NEXT_AUTH_URL="http://localhost:3000"
    AUTH_GITHUB_ID="your_github_id"
    AUTH_GITHUB_SECRET="your_github_secret" # You will need to create a GitHub OAuth app
+   AUTH_GOOGLE_ID="your_google_id"
+   AUTH_GOOGLE_SECRET="your_google_secret" # You will need to create a Google OAuth app from their Cloud console
    ```
 
    **Note:** It is important to follow the naming convention for Auth.js providers (e.g., `AUTH_GITHUB_ID`). See [Auth.js Environment Variables Guide](https://authjs.dev/guides/environment-variables#oauth-variables) for more information.
