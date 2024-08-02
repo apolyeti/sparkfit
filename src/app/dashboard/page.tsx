@@ -20,20 +20,20 @@ import type {
 } from                      "@/utils/types";
 
 import FileInput                from    "@/components/DashboardComponents/FileInput";
-import ClothesModal             from    "@/components/DashboardComponents/ClothesModal";
-import ClothesEntry             from    "@/components/DashboardComponents/ClothesEntry";
-import EditItem                 from    "@/components/DashboardComponents/EditItem";
+import ClothesModal             from    "@/components/DashboardComponents/Modals/ClothesModal";
+import ClothesEntry             from    "@/components/DashboardComponents/Modals/ClothesEntry";
+import EditItem                 from    "@/components/DashboardComponents/Modals/EditItem";
 import ClosetItem               from    "@/components/DashboardComponents/ClosetItem";
 import OutfitChoicesComponent   from    "@/components/DashboardComponents/OutfitChoices";
 import ProfileCard              from    "@/components/DashboardComponents/ProfileCard";
 import WeatherDisplay           from    "@/components/DashboardComponents/WeatherDisplay";
-import OutfitLoading            from    "@/components/DashboardComponents/OutfitLoading";
 import {
     UpArrow,
     DownArrow
 }                               from    "@/components/DashboardComponents/Arrows";
-import DefaultSkeleton          from    "@/components/DefaultSkeleton";
-import LargeSkeleton            from    "@/components/LargeSkeleton";
+import DefaultSkeleton          from    "@/components/LoadingComponents/DefaultSkeleton";
+import LargeSkeleton            from    "@/components/LoadingComponents/LargeSkeleton";
+import OutfitLoading            from    "@/components/LoadingComponents/OutfitLoading";
 
 
 

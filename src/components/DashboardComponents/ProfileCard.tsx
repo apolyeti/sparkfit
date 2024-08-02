@@ -1,7 +1,7 @@
 "use client";
 
 import { useSession }   from "next-auth/react";
-import DefaultSkeleton  from "@components/DefaultSkeleton";
+import DefaultSkeleton  from "@/components/LoadingComponents/DefaultSkeleton";
 import Image            from "next/image";
 
 export default function ProfileCard() {
