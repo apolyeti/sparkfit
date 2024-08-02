@@ -208,8 +208,8 @@ export default function Dashboard() {
 
                     <div className="p-4">
                         {userCloset.length > 0 ? (
-                            <div className="border-2 p-1 box-shadow">
-                                <div className="grid grid-cols-6 gap-2 animate-fadeIn">
+                            <div className="border-2 p-0.5 box-shadow">
+                                <div className="grid grid-cols-6 animate-fadeIn">
                                     {closetExpanded ? (
                                         userCloset.map((item, index) => (
                                             <ClosetItem key={index} image={item} handleEdit={() => handleEdit(item)}/>
@@ -230,9 +230,11 @@ export default function Dashboard() {
                     </div>
                     
                     <div className="p-4 text-center flex-col text-lg">
-                        <button onClick={handleGenerateOutfits} className="outfit-btn" id="outfit-btn">
-                            GENERATE
-                        </button>
+                        {userCloset.length > 1 && 
+                            <button onClick={handleGenerateOutfits} className="outfit-btn" id="outfit-btn">
+                                GENERATE
+                            </button>
+                        }
                         {loading ? (
                             <OutfitLoading />
                         ) : (

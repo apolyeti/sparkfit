@@ -18,12 +18,12 @@ export default function NavBar() {
     return (
         <div className="p-2">
             <div className="navbar justify-between items-center p-3">
-                <div className="text-xl">
+                <div className="text-xl navbar-link">
                     <Link href="/">
                         Sparkfit
                     </Link>
                 </div>
-                <div className="flex space-x-4">
+                <div className="flex space-x-4 navbar-link">
                     <button onClick={handleSignOut}>
                         Sign Out
                     </button>
