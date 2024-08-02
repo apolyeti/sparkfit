@@ -5,7 +5,7 @@ import Image    from "next/image";
 
 export default function OutfitLoading() {
     return (
-        <div className="loading-container">
+        <div className="loading-container" id="outfit-loading">
             <div className="flex space-x-4">
                 <Image
                     src={Jacket}

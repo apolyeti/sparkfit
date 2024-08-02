@@ -104,6 +104,9 @@ export default function Dashboard() {
         if (session?.user?.email && userLocationInfo) {
             try {
                 setLoading(true);
+                setTimeout(() => {
+                    document.getElementById("outfit-loading")?.scrollIntoView({ behavior: "smooth" });
+                }, 50);
                 const outfitChoices = await generateOutfits(session.user.email, userCloset, userLocationInfo);
                 setOutfitChoices(outfitChoices);
                 setLoading(false);
@@ -176,9 +179,11 @@ export default function Dashboard() {
                             onUpdate={handleUpdateImages}
                         />
                     ))}
-                    <button className="font-bold" onClick={handleSubmit}>
-                        Submit
-                    </button>
+                    <div className="w-full flex justify-center">
+                        <button className="submit-btn" onClick={handleSubmit}>
+                            Submit
+                        </button>
+                    </div>
                 </ClothesModal>
                 <ClothesModal isOpen={EditModal} onClose={closeEditModal}>
                     {selectedImage && (
@@ -219,7 +224,7 @@ export default function Dashboard() {
 
                     <div className="p-4">
                         {userCloset.length > 0 ? (
-                            <div ref={closetRef} className={`closet-container ${closetExpanded ? "expanded" : "collapsed"} border-2 p-0.5 box-shadow`}>
+                            <div ref={closetRef} className={`closet-container ${closetExpanded ? "expanded" : "collapsed"} border-2 p-2 box-shadow`}>
                                 <div className={'grid grid-cols-6 animate-fadeIn'}>
                                     {closetExpanded ? (
                                         userCloset.map((item, index) => (

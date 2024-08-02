@@ -316,5 +316,17 @@
 }
 
 .closet-container.expanded {
-    max-height: 1000px; /* A large enough value to fit all items */
+    max-height: 100vh; 
+}
+
+.submit-btn {
+    padding-top: 10px;
+    width: 50%;
+    border: 2px solid #f7ece1;
+    padding: 10px;
+}
+
+.submit-btn:hover {
+    background-color: #09456b36;
+    cursor: pointer;
 }
