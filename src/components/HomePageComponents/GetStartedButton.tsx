@@ -8,10 +8,12 @@ export default function GetStartedButton() {
     const { data: session } = useSession();
 
     return (
-        <Link href={session ? "/dashboard" : "/auth"}>
-            <text className="text-xl animate-fadeInUpSlow p-2 cursor-pointer">
-                {session ? "Dashboard" : "Get Started"}
-            </text>
-        </Link>
+        <div className="cursor-pointer get-started">
+            <Link href={session ? "/dashboard" : "/auth"}>
+                <text className="text-xl p-2">
+                    {session ? "Dashboard" : "Get Started"}
+                </text>
+            </Link>
+        </div>
     );
 }

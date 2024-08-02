@@ -97,7 +97,7 @@ export default function Dashboard() {
                 setLoading(false);
                 // wait for a bit before scrolling to outfit
                 setTimeout(() => {
-                    document.getElementById("outfit-reason")?.scrollIntoView({ behavior: "smooth" });
+                    document.getElementById("outfit-container")?.scrollIntoView({ behavior: "smooth" });
                 }, 100);
             } catch (error) {
                 console.error(error);
@@ -208,8 +208,8 @@ export default function Dashboard() {
 
                     <div className="p-4">
                         {userCloset.length > 0 ? (
-                            <div>
-                                <div className="grid grid-cols-6 gap-2">
+                            <div className="border-2 p-1 box-shadow">
+                                <div className="grid grid-cols-6 gap-2 animate-fadeIn">
                                     {closetExpanded ? (
                                         userCloset.map((item, index) => (
                                             <ClosetItem key={index} image={item} handleEdit={() => handleEdit(item)}/>
