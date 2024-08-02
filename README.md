@@ -3,9 +3,11 @@
 
 Sparkfit is your personal outfit assistant. It helps you choose the best outfit for the day based on the weather, given your wardrobe.
 
-## 🚧 Still in Development
+https://github.com/user-attachments/assets/4684b00a-f9d5-4059-b163-9dbef57832cb
 
-The deployed version (on Vercel) does not work as there is no hosted backend to support it. If you want to try it out, you can clone the repository and run the frontend locally. The backend repository can be found [here](https://github.com/apolyeti/sparkfit-backend).
+## 🚧 Not yet deployed
+
+The deployed version (on Vercel) does not currently work as there is no hosted backend to support it. If you want to try it out, you can clone the repository and run the frontend locally. The backend repository can be found [here](https://github.com/apolyeti/sparkfit-backend).
 
 ## Getting Started
 
